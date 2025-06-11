@@ -4,24 +4,33 @@
 My name is David Honig and I'm a Data Analyst. I'm also a fan of boardgames with some favorites including Ascension, San Juan, and Century Golem Edition. This project demonstrates a variety of Excel skills needed as an analyst
 
 ## Background
-	[According to an article by Fortune Business Insights] (https://www.fortunebusinessinsights.com/board-games-market-104972), "The global board games market size was valued at USD 14.37 billion in 2024. The market is projected to grow from USD 15.83 billion in 2025 to USD 32.00 billion by 2032.
-	North America dominated the board games market with a market share of 41.68% in 2024.
-	Source: https://www.fortunebusinessinsights.com/board-games-market-104972
-	
-	
-Situation:
-	I'm a data analyst working for a fictional boardgame developer called Checkmate LLC. Ms. Queen, the company president, is looking to make the next best selling game. She has a team of developers but doesn't know what they should concentrate on.
-	
-	Mr. Rook of the marketing team has previously found the highest rated games sell the most and bring in the  most revenue. 
+[According to an article by Fortune Business Insights](https://www.fortunebusinessinsights.com/board-games-market-104972), "The global board games market size was valued at USD 14.37 billion in 2024. The market is projected to grow from USD 15.83 billion in 2025 to USD 32.00 billion by 2032.
 
-	My manager, Mr. Bishop, has assigned me the task of looking for commonalities in the top boardgames which could help point the development team in the right direction.
+North America dominated the board games market with a market share of 41.68% in 2024.
 	
-Data collection:
-	Boardgamegeek.com is a well-known website in the board game community. It provides details about each game, provide ratings, and allows users to keep track of games in their collection.
+## Scenario
+I'm a data analyst working for a fictional boardgame developer called Checkmate LLC. Ms. Queen, the company president, is looking to make the next best selling game. Checkmate has a team of developers but doesn't know what they should concentrate on.
 	
-	Searched the website kaggle.com for a dataset including multiple details about each game I found a dataset from February 2021: https://www.kaggle.com/datasets/melissamonfared/board-games
-	The data was partially cleaned excluding unranked games and only games with a minimum of 30 user ratings.
-	The file was in a Comma Separated Values (.csv) format.
+Mr. Rook of the marketing team has previously found the highest rated games sell the most and bring in the  most revenue. 
+
+My manager, Mr. Bishop, has assigned me the task of looking for commonalities in the top boardgames which could help point the development team in the right direction.
+
+### Excel Skills Used
+
+The following Excel skills were utilized for analysis:
+
+- **📊 Pivot Tables**
+- **📈 Pivot Charts**
+- **🧮 DAX (Data Analysis Expressions)**
+- **🔍 Power Query**
+- **💪 Power Pivot**
+ 
+## Data collection
+BoardGameGeek.com is a well-known website in the board game community. It provides many details for each game, allows users to rate games, and keeps track of games in each user's collection.
+	
+Searched the website [kaggle.com](www.kaggle.com) for a dataset including multiple details about each game [a dataset from February 2021 was located](https://www.kaggle.com/datasets/melissamonfared/board-games)
+- The data was partially cleaned excluding unranked games and only games with a minimum of 30 user ratings.
+- The file was in a Comma Separated Values (.csv) format.
 	
 Dataset Review:
 	1. Using Power Query data was imported into an Excel Table named "All_Games". 
