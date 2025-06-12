@@ -46,19 +46,17 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 1. The table All_Games was added to the Data Model and a count of all games was calculated with `Game_Count:=DISTINCTCOUNT(All_games[ID])`
 2. Median of the Rating Average was calculated with `All_Games_Median:=MEDIAN(All_games[Rating Average])`
 3. Looking at the pivotchart **How Many Boardgames Have Been Created Over Time?** we can see over the past 20 years the number of boardgames have been greatly increased. With the advent of crowdfunding platforms like Kickstarter and Indiegogo numerous small developers have been able to release their games.
-![Boardgames over time](Images/boardgames_over_time)
+![Boardgames over time](/Images/boardgames_over_time.png)
 The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" column creating a nice bell curve with a median value is 6.43.
-![how_are_all_games_rated](/Images/how_are_all_games_rated/png)
+![how_are_all_games_rated](/Images/how_are_all_games_rated.png)
 	
 
 # Do you have a game recommendation?
-To determine how to choose the top games a couple options were considered. Picking a number like the top 1000 is easy but a more scientific choice was decided on. 
-	2. First, the 90th and 95th percentile were calculated.
-		a. Within the data model the measure "90th_Percentile" and 95th_Percentile" were created using the formulas:
-			i. 90th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.90) and
-			ii. 95th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.95)
-		b. Two more measure were created to count the number of games in these percentiles.
-			i. Count_of_90th_Percentile:=VAR PercentileValue = [90th_Percentile]
+- The 90th and 95th percentile were calculated with the formula:
+	`90th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.90)` (changing the final element for 95th percentile)
+- Two more measure were created to count the number of games in these percentiles.
+	```
+ Count_of_90th_Percentile:=VAR PercentileValue = [90th_Percentile]
 			RETURN
 			COUNTROWS(
 			 FILTER(
@@ -66,35 +64,23 @@ To determine how to choose the top games a couple options were considered. Picki
 			 All_games[Rating Average] >= PercentileValue
 			 )
 			)
-			ii. Count_of_95th_Percentile:=VAR PercentileValue = [95th_Percentile]
-			RETURN
-			COUNTROWS(
-			 FILTER(
-			 All_games,
-			 All_games[Rating Average] >= PercentileValue
-			 )
-			)
-			iii. These two measures resulted in 2,075 games in the 90th percentile with a value of 7.56 or higher and 1,038 games in the 95th percentile with a value of 7.88 or higher.
-			iv. Analyzing games in the 90th percentile was chosen.
-	3. In the Power Query Editor the original query was referenced to a new query named "Top_Games"
-		a. A filter was applied to the Rating Average for those greater than or equal to 7.56
-		b. The column statistics were checked to make sure there were 2,075 rows.
-		c. The query "Top_Games" was added to the data model
+	```
+- The 90th percentile was chosen with 2,075 games with a rating average of 7.56 or higher compared to the 95th percentile with 1,038 games and a rating average of 7.88 or higher.
+			
+- A new query named "Top_Games" was referenced and filter applied to the Rating Average for those greater than or equal to 7.56.
+- Column statistics were checked to make sure there were 2,075 rows and the query was added to the data model
 
-
-Let's me be explicit
-	1. Going into the data model, adding the "Top_Games" into the data model allows me to create explicit measures saving time in the long run
-	2. These measures include the count of games:
-		a. Count_TopGames:=DISTINCTCOUNT(TopGames[ID])
-	3. Percent of the top games
-		Percent_of_games:=DIVIDE(
-		 COUNT(TopGames[ID]),
-		 CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
-	4. Rating Average
-		a. Rating_Average_TopGames:=AVERAGE(TopGames[Rating Average])
-		b. The top games have an average of 7.97/10
-	5. Complexity Average
-		a. Complexity_Average_TopGames:=AVERAGE(TopGames[Complexity Average])
+# Let's me be explicit
+Explicit measures were added including:
+1. The count of games: `Count_TopGames:=DISTINCTCOUNT(TopGames[ID])`
+2. Percent of the top games:
+```
+Percent_of_games:=DIVIDE(
+COUNT(TopGames[ID]),
+CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
+```
+3. Rating Average: `Rating_Average_TopGames:=AVERAGE(TopGames[Rating Average])`
+4. Complexity Average: `Complexity_Average_TopGames:=AVERAGE(TopGames[Complexity Average])`
 
 How many can play?
 	1. The sheet "# of Players" compares the Minimum and Maximum number of player to the Rating Average.
