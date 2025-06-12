@@ -32,7 +32,7 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 - The Comma Separated Values (.csv) file was partially cleaned by excluding unranked games and including games with a minimum of 30 user ratings.
 	
 ## Dataset Review
-1. Using Power Query, 20,343 rows were imported into an Excel Table named "All_Games".
+1. Using Power Query, 20,345 rows were imported into an Excel Table named "All_Games".
 2. The unique ID will be used as a primary key as there are 11 different games called "Robin Hood."
 3. The formula `=COUNTBLANK(All_Games[ID])` found 15 missing IDs.
 
@@ -40,44 +40,19 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 1. Missing IDs could be found by quickly searching boardgamegeek.com, but an approach was taken if there were many more missing values.
 2. [A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025) was loaded with "Only create Connection" and named *Feb2025 Boardgames*. This dataset was not originally used as it is missing many game details.
 3. The two queries were merged, a "Conditional Column" was added, and after removing duplicates the column ID was finalized.
-   ![conditional_column](/images/conditional_column.png)
+   ![conditional_column](/Images/conditional_column.png)
 	
-# Data exploration
-	1. Boardgamegeek allows all users to rank games on a scale of 1-10.
-	2. Each boardgame has a "Rating Average" calculated by averaging all user ratings whether they have played the game or not.
-		a. This is a limitation, though I don't believe  many people are rating games they have never played.
-	3. These are the column statistics for the Rating Average
-	4. Count	20343
-	Error	0
-	Empty	0
-	Distinct	622
-	Unique	79
-	NaN	0
-	Zero	0
-	Min	1.05
-	Max	9.58
-	Average	6.403226663
-	Standard deviation	0.935910525920439
-	
-When did we get so popular?
-	1. From the Power Query Editor the "All_Games" was closed and loaded to a new sheet named "All Games"
-	2. The table All_Games was added to the Data Model.
-		a. A count of all games was created with the formula:
-		b. Game_Count:=DISTINCTCOUNT(All_games[ID])
-	3. The median of the Rating Average was calculated with the formula:
-		a. All_Games_Median:=MEDIAN(All_games[Rating Average])
-	4. Looking at the pivotchart "How Many Boardgames Have Been Created Over Time?" we can see over the past 20 the number of boardgames have been greatly increased.
-		a. With the advent of crowdfunding platforms like Kickstarter and Indiegogo numerous small developers have been able to release their games.
-		b. The biggest success story is Exploding Kittens by The Oatmeal. "Beginning as a Kickstarter project seeking US$10,000 in crowdfunding, it exceeded its goal in eight minutes. On January 27, 2015, after seven days, it passed 103,000 backers, setting the record for the most backers in Kickstarter history. At completion on February 19, 2015, it had US$8,782,571 in pledges by 219,382 backers." Source 
-		
-Not every game is a winner
-	1. The histogram titled "How Are All the Boardgames Rated" was created using the "Rating Average" column creating a nice bell curve.
-		a. From the data model the median value is 6.43
-	2. 
+# When did we get so popular?
+1. The table All_Games was added to the Data Model and a count of all games was calculated with `Game_Count:=DISTINCTCOUNT(All_games[ID])`
+2. Median of the Rating Average was calculated with `All_Games_Median:=MEDIAN(All_games[Rating Average])`
+3. Looking at the pivotchart **How Many Boardgames Have Been Created Over Time?** we can see over the past 20 years the number of boardgames have been greatly increased. With the advent of crowdfunding platforms like Kickstarter and Indiegogo numerous small developers have been able to release their games.
+![Boardgames over time](Images/boardgames_over_time)
+The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" column creating a nice bell curve with a median value is 6.43.
+![how_are_all_games_rated](/Images/how_are_all_games_rated/png)
 	
 
-Do you have a game recommendation? 
-	1. To determine how to choose the top games a couple options were considered. Picking a number like the top 1000 is easy but a more scientific choice was decided on. 
+# Do you have a game recommendation?
+To determine how to choose the top games a couple options were considered. Picking a number like the top 1000 is easy but a more scientific choice was decided on. 
 	2. First, the 90th and 95th percentile were calculated.
 		a. Within the data model the measure "90th_Percentile" and 95th_Percentile" were created using the formulas:
 			i. 90th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.90) and
