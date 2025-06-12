@@ -100,25 +100,28 @@ The sheet "# of Players" compares the Minimum and Maximum number of player to th
 
 ### Going on a side quest
 
-The Top_Games query was referenced to create a new query titled "Top_Games_Minimum_Players" 
-			i. All column except ID, Name, Year Published, and Min Players were removed.
-			ii. A filter was  applied to Min Players for any values >=5
-			iii. In the Top Games, only 13 require more than 4 players
-			iv. Changing the filer again, only 39 games require more than 3 players.
-	1. 
+Top_Games was referenced to create "Top_Games_Minimum_Players" with a filter applied to Min Players for any values >=5.
+- In the Top Games, only 13 require more than 4 players
+- Changing the filer again, only 39 games require more than 3 players.
 
-		
-	1. The sheets "Play Time" includes a bar chart with the top 20 play times.
+## One more round?
+
+The sheets "Play Time" includes a bar chart with the top 20 play times.
 		a. 120, 60, and 90 minutes are the most popular followed by 180, 30, and 45.
 		b. Between 1 and 2 hours looks to be the ideal play time. It's long enough to have engaging gameplay and strategy, yet short enough to prevent the game from becoming tedious. 
+![Minimumn Play Time](/Images/play_time.png)
 
-	1. The sheet "Minimum Age" includes the bar chart "What is the Minimum Player Age of the Top Games?"
+## More complicated than Trouble
+
+The sheet "Minimum Age" includes the bar chart "What is the Minimum Player Age of the Top Games?"
 		a. The top games recommend players be at least 12 to 14 years old.
 		b. At this age they would be mature enough to understand the rules and come up with a strategy. 
+![Minimum Recommended Player Age](/Images/min_age.png)
 
-Do you  have any Jacks?
-	While al of February 2021 there are over 20,000 boardgames with a myriad of designs and themes, there are similar ways the games are played.
-	
+## Do you  have any Jacks?
+
+While there are over 20,000 boardgames with a myriad of designs and themes, there are similar ways the games are played.
+	-------------stopped here----------
 	Boardgame mechanics are the specific rules and systems that define how a game is played, influencing player actions, outcomes, and the overall flow of the game. They dictate everything from turn order to how players achieve victory. Each game typically has multiple mechanics.
 Some common mechanics include: 
 	• Dice rolling: Adding an element of chance and random outcomes. 
