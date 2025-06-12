@@ -1,14 +1,17 @@
 # BoardGameGeek.com Excel Project
 
 ## Introduction
+
 My name is David Honig and I'm a Data Analyst. I'm also a fan of boardgames with some favorites including Ascension, San Juan, and Century Golem Edition. This project demonstrates a variety of Excel skills needed as an analyst
 
 ## Background
+
 [According to an article by Fortune Business Insights](https://www.fortunebusinessinsights.com/board-games-market-104972), "The global board games market size was valued at USD 14.37 billion in 2024. The market is projected to grow from USD 15.83 billion in 2025 to USD 32.00 billion by 2032.
 
 North America dominated the board games market with a market share of 41.68% in 2024.
 	
 ## Scenario
+
 I'm a data analyst working for a fictional boardgame developer called *Checkmate LLC*. Ms. Queen, the company president, is looking to make the next best selling game. Checkmate has a team of developers but doesn't know what they should concentrate on.
 	
 Mr. Rook of the marketing team has previously found the highest rated games sell the most and bring in the  most revenue. 
@@ -26,6 +29,7 @@ The following Excel skills were utilized for analysis:
 - **💪 Power Pivot**
  
 ## Data collection
+
 BoardGameGeek.com is a well-known website in the board game community. It provides many details for each game, allows users to rate games, and keeps track of games in each user's collection.
 	
 [A dataset from February 2021 was located](https://www.kaggle.com/datasets/melissamonfared/board-games) from [kaggle.com](www.kaggle.com).
@@ -37,12 +41,14 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 3. The formula `=COUNTBLANK(All_Games[ID])` found 15 missing IDs.
 
 ### Updating missing IDs
+
 1. Missing IDs could be found by quickly searching boardgamegeek.com, but an approach was taken if there were many more missing values.
 2. [A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025) was loaded with "Only create Connection" and named *Feb2025 Boardgames*. This dataset was not originally used as it is missing many game details.
 3. The two queries were merged, a "Conditional Column" was added, and after removing duplicates the column ID was finalized.
    ![conditional_column](/Images/conditional_column.png)
 	
-# When did we get so popular?
+## When did we get so popular?
+
 1. The table All_Games was added to the Data Model and a count of all games was calculated with `Game_Count:=DISTINCTCOUNT(All_games[ID])`
 2. Median of the Rating Average was calculated with `All_Games_Median:=MEDIAN(All_games[Rating Average])`
 3. Looking at the pivotchart **How Many Boardgames Have Been Created Over Time?** we can see over the past 20 years the number of boardgames have been greatly increased. With the advent of crowdfunding platforms like Kickstarter and Indiegogo numerous small developers have been able to release their games.
@@ -51,7 +57,8 @@ The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" c
 ![how_are_all_games_rated](/Images/how_are_all_games_rated.png)
 	
 
-# Do you have a game recommendation?
+## Do you have a game recommendation?
+
 - The 90th and 95th percentile were calculated with the formula:
 	`90th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.90)` (changing the final element for 95th percentile)
 - Two more measure were created to count the number of games in these percentiles.
@@ -71,6 +78,7 @@ The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" c
 - Column statistics were checked to make sure there were 2,075 rows and the query was added to the data model
 
 # Let's me be explicit
+
 Explicit measures were added including:
 1. The count of games: `Count_TopGames:=DISTINCTCOUNT(TopGames[ID])`
 2. Percent of the top games:
@@ -82,15 +90,17 @@ CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
 3. Rating Average: `Rating_Average_TopGames:=AVERAGE(TopGames[Rating Average])`
 4. Complexity Average: `Complexity_Average_TopGames:=AVERAGE(TopGames[Complexity Average])`
 
-How many can play?
-	1. The sheet "# of Players" compares the Minimum and Maximum number of player to the Rating Average.
-	2. A slicer was added to both tables allowing visual comparison for counts on the lower end.
-		a. The most common minimum number of player for the top games are 2 at 1,188 games and 1 at 741 games
-		b. The most common maximum number of player for the top games are 4 at 666 games and 2 at 630 games.
-		c. Looking at the minimum player count values, having a large minimum player count is not a good idea.
-		
-Doing a quick side quest
-		a. The Top_Games query was referenced to create a new query titled "Top_Games_Minimum_Players" 
+## How many can play?
+
+The sheet "# of Players" compares the Minimum and Maximum number of player to the Rating Average.
+1. The most common minimum number of player for the top games are 2 at 1,188 games and 1 at 741 games.
+![Minimum Number of Players](/Images/min_players.png)
+3. The most common maximum number of player for the top games are 4 at 666 games and 2 at 630 games.
+![Maximum Number of Players](/Images/max_players.ong)
+
+### Going on a side quest
+
+The Top_Games query was referenced to create a new query titled "Top_Games_Minimum_Players" 
 			i. All column except ID, Name, Year Published, and Min Players were removed.
 			ii. A filter was  applied to Min Players for any values >=5
 			iii. In the Top Games, only 13 require more than 4 players
