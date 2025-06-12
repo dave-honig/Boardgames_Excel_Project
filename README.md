@@ -34,29 +34,15 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 ## Dataset Review
 1. Using Power Query, 20,343 rows were imported into an Excel Table named "All_Games".
 2. The unique ID will be used as a primary key as there are 11 different games called "Robin Hood."
-3. The formula '=COUNTBLANK(All_Games[ID])' found 15 missing IDs.
-Missing IDs could be found by quickly searching boardgamegeek.com, but an approach was taken if there were many more missing values.
-[A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025).
-		b. This was not originally used as it was missing many details about each game.
-	6. Get data from .csv imported the data was loaded with "Only create Connection"
-		a. The query was named Feb2025 Boardgames
-	7. In the query editor for All_Games "Merge Queries" was used to combine the data.
-		a. The "Name" and Year Published" were used for the matching columns
-	8. In the resulted merge, Game_ID, Description, and Link were kept.
-	9. Both ID and Final_ID were formatted as Text for the next step
-	10. A "Conditional Column" was added called Final_ID
-		a. If ID = null then Game_ID
-		 Else ID
-	11. 
-	12. Cleaning up, the two extra ID columns were removed.
-	13. Two games were left with null values. 
-	14. For completeness, two more clauses were added to the conditional formatting.
-	15. 
-	16. Final_ID was renamed to ID
-	17. Duplicate rows were removed  using Remove Rows --> Remove Duplcates
+3. The formula `=COUNTBLANK(All_Games[ID])` found 15 missing IDs.
 
+### Updating missing IDs
+1. Missing IDs could be found by quickly searching boardgamegeek.com, but an approach was taken if there were many more missing values.
+2. [A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025) was loaded with "Only create Connection" and named *Feb2025 Boardgames*. This dataset was not originally used as it is missing many game details.
+3. The two queries were merged, a "Conditional Column" was added, and after removing duplicates the column ID was finalized.
+   ![conditional_column](/images/conditional_column.png)
 	
-Data exploration
+# Data exploration
 	1. Boardgamegeek allows all users to rank games on a scale of 1-10.
 	2. Each boardgame has a "Rating Average" calculated by averaging all user ratings whether they have played the game or not.
 		a. This is a limitation, though I don't believe  many people are rating games they have never played.
