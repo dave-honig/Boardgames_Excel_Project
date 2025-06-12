@@ -9,7 +9,7 @@ My name is David Honig and I'm a Data Analyst. I'm also a fan of boardgames with
 North America dominated the board games market with a market share of 41.68% in 2024.
 	
 ## Scenario
-I'm a data analyst working for a fictional boardgame developer called Checkmate LLC. Ms. Queen, the company president, is looking to make the next best selling game. Checkmate has a team of developers but doesn't know what they should concentrate on.
+I'm a data analyst working for a fictional boardgame developer called *Checkmate LLC*. Ms. Queen, the company president, is looking to make the next best selling game. Checkmate has a team of developers but doesn't know what they should concentrate on.
 	
 Mr. Rook of the marketing team has previously found the highest rated games sell the most and bring in the  most revenue. 
 
@@ -28,36 +28,32 @@ The following Excel skills were utilized for analysis:
 ## Data collection
 BoardGameGeek.com is a well-known website in the board game community. It provides many details for each game, allows users to rate games, and keeps track of games in each user's collection.
 	
-Searched the website [kaggle.com](www.kaggle.com) for a dataset including multiple details about each game [a dataset from February 2021 was located](https://www.kaggle.com/datasets/melissamonfared/board-games)
-- The data was partially cleaned excluding unranked games and only games with a minimum of 30 user ratings.
-- The file was in a Comma Separated Values (.csv) format.
+[A dataset from February 2021 was located](https://www.kaggle.com/datasets/melissamonfared/board-games) from [kaggle.com](www.kaggle.com).
+- The Comma Separated Values (.csv) file was partially cleaned by excluding unranked games and including games with a minimum of 30 user ratings.
 	
-Dataset Review:
-	1. Using Power Query data was imported into an Excel Table named "All_Games". 
-		a. 20,343 rows were loaded.
-	2. The unique ID will be a handy reference as some games have the same name.
-		a. There are 11 different games called "Robin Hood."
-	3. The formula =COUNTBLANK(All_Games[ID]) was used to checked if any IDs were missing.
-		a. Unfortunately 15 were.
-	4. These numbers could be found by quickly searching boardgamegeek.com, but let's take the approach if there were many more missing values.
-		a. A second boardgamegeek list was found on Kaggle.com from February 2025 https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025.
+## Dataset Review
+1. Using Power Query, 20,343 rows were imported into an Excel Table named "All_Games".
+2. The unique ID will be used as a primary key as there are 11 different games called "Robin Hood."
+3. The formula '=COUNTBLANK(All_Games[ID])' found 15 missing IDs.
+Missing IDs could be found by quickly searching boardgamegeek.com, but an approach was taken if there were many more missing values.
+[A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025).
 		b. This was not originally used as it was missing many details about each game.
-	5. Get data from .csv imported the data was loaded with "Only create Connection"
+	6. Get data from .csv imported the data was loaded with "Only create Connection"
 		a. The query was named Feb2025 Boardgames
-	6. In the query editor for All_Games "Merge Queries" was used to combine the data.
+	7. In the query editor for All_Games "Merge Queries" was used to combine the data.
 		a. The "Name" and Year Published" were used for the matching columns
-	7. In the resulted merge, Game_ID, Description, and Link were kept.
-	8. Both ID and Final_ID were formatted as Text for the next step
-	9. A "Conditional Column" was added called Final_ID
+	8. In the resulted merge, Game_ID, Description, and Link were kept.
+	9. Both ID and Final_ID were formatted as Text for the next step
+	10. A "Conditional Column" was added called Final_ID
 		a. If ID = null then Game_ID
 		 Else ID
-	10. 
-	11. Cleaning up, the two extra ID columns were removed.
-	12. Two games were left with null values. 
-	13. For completeness, two more clauses were added to the conditional formatting.
-	14. 
-	15. Final_ID was renamed to ID
-	16. Duplicate rows were removed  using Remove Rows --> Remove Duplcates
+	11. 
+	12. Cleaning up, the two extra ID columns were removed.
+	13. Two games were left with null values. 
+	14. For completeness, two more clauses were added to the conditional formatting.
+	15. 
+	16. Final_ID was renamed to ID
+	17. Duplicate rows were removed  using Remove Rows --> Remove Duplcates
 
 	
 Data exploration
