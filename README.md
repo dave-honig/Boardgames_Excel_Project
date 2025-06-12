@@ -96,7 +96,7 @@ The sheet "# of Players" compares the Minimum and Maximum number of player to th
 1. The most common minimum number of player for the top games are 2 at 1,188 games and 1 at 741 games.
 ![Minimum Number of Players](/Images/min_players.png)
 3. The most common maximum number of player for the top games are 4 at 666 games and 2 at 630 games.
-![Maximum Number of Players](/Images/max_players.ong)
+![Maximum Number of Players](/Images/max_players.png)
 
 ### Going on a side quest
 
@@ -121,7 +121,12 @@ The sheet "Minimum Age" includes the bar chart "What is the Minimum Player Age o
 ## Do you  have any Jacks?
 
 While there are over 20,000 boardgames with a myriad of designs and themes, there are similar ways the games are played.
-	-------------stopped here----------
+
+ 
+ -------------stopped here----------
+
+
+ 
 	Boardgame mechanics are the specific rules and systems that define how a game is played, influencing player actions, outcomes, and the overall flow of the game. They dictate everything from turn order to how players achieve victory. Each game typically has multiple mechanics.
 Some common mechanics include: 
 	• Dice rolling: Adding an element of chance and random outcomes. 
