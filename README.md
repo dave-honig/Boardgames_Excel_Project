@@ -44,7 +44,7 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 
 1. Missing IDs could be found by quickly searching boardgamegeek.com, but an approach was taken if there were many more missing values.
 2. [A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025) was loaded with "Only create Connection" and named *Feb2025 Boardgames*. This dataset was not originally used as it is missing many game details.
-3. The two queries were merged, a "Conditional Column" was added, and after removing duplicates the column ID was finalized.
+3. The two queries were merged, a "Conditional Column" was added, and after removing duplicates the column ID was finalized.  
 	<img src="/Images/conditional_column.png" width=60% alt="Conditional Column Entry">
 	
 ## When did we get so popular?
