@@ -121,122 +121,60 @@ The sheet "Minimum Age" includes the bar chart "What is the Minimum Player Age o
 ## Do you  have any Jacks?
 
 While there are over 20,000 boardgames with a myriad of designs and themes, there are similar ways the games are played.
-
- 
- -------------stopped here----------
-
-
- 
-	Boardgame mechanics are the specific rules and systems that define how a game is played, influencing player actions, outcomes, and the overall flow of the game. They dictate everything from turn order to how players achieve victory. Each game typically has multiple mechanics.
+Boardgame mechanics are the specific rules and systems that define how a game is played, influencing player actions, outcomes, and the overall flow of the game. They dictate everything from turn order to how players achieve victory. Each game typically has multiple mechanics.
 Some common mechanics include: 
 	• Dice rolling: Adding an element of chance and random outcomes. 
 	• Card drafting: Players select from a pool of cards, then pass them to another player to select.
 	• Area control: Players compete to control areas on a map or board. 
 	• Set collection: Players collect specific sets of items or cards to score points
 	
-The "Top_Games" query includes the column "Mechanics" with each mechanic listed as comma separated values. The next goal is to split this column into individual column with one mechanic per column, then create a single column with them all listed.
-
-	1. Within the Power Query Editor the "Top_Games" query was references creating a new query named "Top_Games_Mechanics".
-	2. Most of the columns are not needed so columns "ID", "Rating Average" and "Mechanics" were selected and "Remove Other Columns" cleaned up the query.
-	3. Cleaning up the data, 27 games were found with no mechanic listed. 
-		a. Blank cells were replaced with "None Listed"
-	4. "Split Columns by Delimiter" is very similar to "Text to Columns" but with a few more options. Splitting by ", " reduces the need to use the "Trim" function after to remove leading spaces. 
-	5. Selecting the 17 new columns which were just created, "Unpivot Columns" transforms the 17 columns into two: "Attribute" and "Value" which I renamed "Top_Game_Mechanics".
-		a. Unpivoting the columns changed the row count from 2,046, all the way to 9,311.
-		b. A new row was created for each mechanic listed after the first. 
-		c. For example, the first ID "303554" is listed in 3 rows. Each row contains a individual mechanic: "Hexagonal Grid", "Modular Board", and "Variable Set-up".
-	6. "Attribute" will not be used so the column was removed.
-	7. "Save and Load to" gives multiple options including loading directly to a PivotTable Report and adding the query into the data model. This removes an extra step of creating a new sheet with a table and then adding it to the data model.
-		a. The new sheet was renamed to "Game Mechanics".
-	
-	8. Returning back to Power Pivot, The "Count_Mechanic" explicit measure was created with the formula: 
-		a. Count_Top_Game_Mechanics:=COUNT(Top_Games_Mechanics[Top_Game_Mechanics])
-		b. Formatting the field with thousands commas and no decimal places saves time in the future.
-	9. To know how many game mechanics are available, a distinct measure was created and named "Distinct_Top_Game_Mechanics" with the formula:
-		a. Distinct_Top_Game_Mechanics:=DISTINCTCOUNT(Top_Games_Mechanics[Top_Game_Mechanics])
-		b. There are 169 distinct game mechanics.
-	10. A percentage measure was added to know how often each mechanic is used compared to the usage of all mechanics with the formula:
-		a. Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
+The "Top_Games" query was referenced creating a new query named "Top_Games_Mechanics".
+1. Cleaning up the data, 27 games were found with no mechanic listed.
+2. Blank cells were replaced with "None Listed."
+3. Each mechanic was split into 17 new columns which were then unpivoted.
+4. Data was saved to a PivotTable Report and the query was added to the data model.
+5. The new sheet was renamed to "Game Mechanics".
+6. The "Count_Mechanic" explicit measure was created with: `Count_Top_Game_Mechanics:=COUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
+7. To know how many game mechanics are available, a distinct measure was created: `Distinct_Top_Game_Mechanics:=DISTINCTCOUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
+8. A percentage measure was added to know how often each mechanic is used compared to the usage of all mechanics:  with the formula:
+```
+Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
 	 COUNT([Top_Game_Mechanics]),
 	 CALCULATE(COUNT(Top_Games_Mechanics[Top_Game_Mechanics]), ALL(Top_Games_Mechanics))
 	 )
-	
-	11. The sheet "Game Mechanics" was created with a Pivot Table from the Data Model.
-		a. Top_Game_Mechanics, Count_Top_Game_Mechanics, and Percent_of_Mechanic_to_all_mechanics were added
-		b. Count_Top_Game_Mechanics was sorted by ascending  values
-		c. A value filter was added to show only the top 10 game mechanics 
-		d. Board game players seem to like the excitement and uncertainty of rolling their math rocks (dice) with 1,029 of the top games using the "Dice Rolling" mechanic.
-		e. This is followed by Variable Player Powers, Simulation, Hand Management, and a Hexagon Grid used in ~500 of the top games.
+```	
+11. The sheet "Game Mechanics" was created with a Pivot Table from the Data Model.
+- Board game players seem to like the excitement and uncertainty of rolling their math rocks (dice) with 1,029 of the top games using the "Dice Rolling" mechanic.
+- This is followed by Variable Player Powers, Simulation, Hand Management, and a Hexagon Grid used in ~500 of the top games.
+![Top Boardgame Game Mechanics](/Images/top_game_mechanics.png)
 
-Wait, what am I supposed to do next?
-	For each game, Boardgamegeek assigns a complexity rating between 1 and 5 defined as a "Community rating for how difficult a game is to understand. Lower rating (lighter weight) means easier."
-	
-	For example, the kids game Trouble is rated at 1.07. While Europa Universalis, a complex wargame reliving 300 years of world history with a playing time of 60 hours has a rating of 4.82.
-	
-	1. All complexity values are rounded to the hundredths place. Grouping these values into buckets will provide a better analysis.
-	2. This is the first field I encountered an unexpected problem.
-		a. It is not possible to group the values in a pivot table created from the data model, so a pivot table was created referencing the table "TopGames" with 
-		b. "Complexity Average" and adding an implicit measure for count.
-		c. Grouping was added to "Complexity Average" Starting at 0, Ending at 5, By 0.25.
-		d. A bar chart was created with the data.
-		e. 
-		f. When the buckets were created Excel processes the numbers as text. This results in 1-1.25, 2-2.25…listed out of order.
-		g. While a manual reorder is possible, it would not help if there were hundreds of buckets out of order.
-		h. This pivot table and chart were deleted for a better way.
-	3. As an alternative method, in the query editor a new column "Complexity Rounded" was created with the formula:
-		a. Number.RoundDown([Difficulty] / 0.25) * 0.25
-		b. This formula rounds down all values to the nearest quarter of a point.
-	4. Next, a new column named "Complexity_Buckets" created clear value buckets with the formula:
-		a. Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)
-		b. The query editor was closed and loaded.
-	5. A pivot table was created with the new "Complexity_Buckets" field and an implicit measure for count.
-	6. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.25
-	
+##Wait, what am I supposed to do next?
+
+For each game, Boardgamegeek assigns a complexity rating between 1 and 5 defined as a "Community rating for how difficult a game is to understand. Lower rating (lighter weight) means easier."
+
+ 1. A new column "Complexity Rounded" was created with the formula: `Number.RoundDown([Difficulty] / 0.25) * 0.25`
+2. "Complexity_Buckets" creates clear value buckets with the formula: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)`
+3. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.25
+![Complexity Graph of Top Games](/Images/top_game_complexity.png)
 		
-So what should the Checkmate LLC developers focus on?
-	Reviewing each metric I can confidently say they should create a game with:
+# What should the Checkmate LLC developers focus on?
+
+Reviewing each metric they should create a game with:
 	1. A minimum of 2 players to play
 	2. Will support 4 or more players
 	3. Take 1 - 2 hours to complete
 	4. Able to be played by those as young as 12
 	5. Involve dice rolling, as well as either Variable Player Powers, Simulation, Hand Management, or a Hexagonal Grid.
 	6. Have a complexity between 2 - 4 out of 5.
-	
-	Interestingly enough, there are already 9 games as of February 2021 which meet this criteria
-		Bora Bora
-		Carnevale: Vicious Fighting Along the Canals of Venice
-		Company of Heroes
-		Raiders of the North Sea
-		The Castles of Burgundy
-		Warhammer 40,000: Kill Team
-		Warhammer Age of Sigmar: Warcry Starter Set
-		Warmachine Prime Mk II
-		Yohei
-		
-		
-		
 
-
-
-
-To DO:
-
-Min and max players average score, then a slicer, then a bar chart, then a box and whisker
-
-
-
-
-Look at the reviews
-	• Do they tend to be on the high range?
-	• Can I create a subset of just the best ranked, then rank them again within that higher end.
-	• Is there any relation between price and score
-	• Between price and complexity
-	• Between complexity and score
-	• What are the most used mechanisms
-	• What are the least used mechanisms
-	• Mechanisms with the highest scores
-	• Score and playtime
-
-
-
-
+## Current offerings
+There are already 9 games as of February 2021 which meet this criteria
+		- Bora Bora
+		- Carnevale: Vicious Fighting Along the Canals of Venice
+		- Company of Heroes
+		- Raiders of the North Sea
+		- The Castles of Burgundy
+		- Warhammer 40,000: Kill Team
+		- Warhammer Age of Sigmar: Warcry Starter Set
+		- Warmachine Prime Mk II
+		- Yohei
