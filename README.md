@@ -45,22 +45,20 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 1. Missing IDs could be found by quickly searching boardgamegeek.com, but an approach was taken if there were many more missing values.
 2. [A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025) was loaded with "Only create Connection" and named *Feb2025 Boardgames*. This dataset was not originally used as it is missing many game details.
 3. The two queries were merged, a "Conditional Column" was added, and after removing duplicates the column ID was finalized.
-   ![conditional_column](/Images/conditional_column.png)
+	<img src="/Images/conditional_column.png" width=60% alt="Conditional Column Entry">
 	
 ## When did we get so popular?
 
-1. The table All_Games was added to the Data Model and a count of all games was calculated with `Game_Count:=DISTINCTCOUNT(All_games[ID])`
-2. Median of the Rating Average was calculated with `All_Games_Median:=MEDIAN(All_games[Rating Average])`
-3. Looking at the pivotchart **How Many Boardgames Have Been Created Over Time?** we can see over the past 20 years the number of boardgames have been greatly increased. With the advent of crowdfunding platforms like Kickstarter and Indiegogo numerous small developers have been able to release their games.
-![Boardgames over time](/Images/boardgames_over_time.png)
+1. The table All_Games was added to the Data Model and a count of all games was calculated: `Game_Count:=DISTINCTCOUNT(All_games[ID])`
+2. Median of the Rating Average was calculated: `All_Games_Median:=MEDIAN(All_games[Rating Average])`
+3. Looking at the pivotchart **"How Many Boardgames Have Been Created Over Time?"**, over the past 20 years the number of boardgames have greatly increased. With the advent of crowdfunding platforms like Kickstarter and Indiegogo numerous small developers have been able to release their games.
+	<img src="/Images/boardgames_over_time.png" width=80% alt="Boardgames over time">
 The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" column creating a nice bell curve with a median value is 6.43.
-![how_are_all_games_rated](/Images/how_are_all_games_rated.png)
-	
+	<img src="/Images/how_are_all_games_rated.png" width=80% alt="How Are All the Games Rated">	
 
 ## Do you have a game recommendation?
 
-- The 90th and 95th percentile were calculated with the formula:
-	`90th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.90)` (changing the final element for 95th percentile)
+- The 90th and 95th percentile were calculated: `90th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.90)` (changing the final element for 95th percentile)
 - Two more measure were created to count the number of games in these percentiles.
 ```
  Count_of_90th_Percentile:=VAR PercentileValue = [90th_Percentile]
@@ -94,9 +92,9 @@ CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
 
 The sheet "# of Players" compares the Minimum and Maximum number of player to the Rating Average.
 1. The most common minimum number of player for the top games are 2 at 1,188 games and 1 at 741 games.
-![Minimum Number of Players](/Images/min_players.png)
+	<img src="/Images/min_players.png" width=60% alt="Minimum Number of Players">	
 3. The most common maximum number of player for the top games are 4 at 666 games and 2 at 630 games.
-![Maximum Number of Players](/Images/max_players.png)
+	<img src="/Images/max_players.png" width=60% alt="Maximum Number of Players">	
 
 ### Going on a side quest
 
@@ -107,16 +105,16 @@ Top_Games was referenced to create "Top_Games_Minimum_Players" with a filter app
 ## One more round?
 
 The sheets "Play Time" includes a bar chart with the top 20 play times.
-		a. 120, 60, and 90 minutes are the most popular followed by 180, 30, and 45.
-		b. Between 1 and 2 hours looks to be the ideal play time. It's long enough to have engaging gameplay and strategy, yet short enough to prevent the game from becoming tedious. 
-![Minimumn Play Time](/Images/play_time.png)
+- 120, 60, and 90 minutes are the most popular followed by 180, 30, and 45.
+- Between 1 and 2 hours is the ideal play time. It's long enough to have engaging gameplay and strategy, yet short enough to prevent the game from becoming tedious. 
+		<img src="/Images/play_time.png" width=60% alt="Minimumn Play Time">	
 
 ## More complicated than Trouble
 
 The sheet "Minimum Age" includes the bar chart "What is the Minimum Player Age of the Top Games?"
 		a. The top games recommend players be at least 12 to 14 years old.
 		b. At this age they would be mature enough to understand the rules and come up with a strategy. 
-![Minimum Recommended Player Age](/Images/min_age.png)
+		<img src="/Images/min_age.png" width=60% alt="Minimum Recommended Player Age">
 
 ## Do you  have any Jacks?
 
@@ -134,7 +132,7 @@ The "Top_Games" query was referenced creating a new query named "Top_Games_Mecha
 3. Each mechanic was split into 17 new columns which were then unpivoted.
 4. Data was saved to a PivotTable Report and the query was added to the data model.
 5. The new sheet was renamed to "Game Mechanics".
-6. The "Count_Mechanic" explicit measure was created with: `Count_Top_Game_Mechanics:=COUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
+6. The "Count_Mechanic" explicit measure was created: `Count_Top_Game_Mechanics:=COUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
 7. To know how many game mechanics are available, a distinct measure was created: `Distinct_Top_Game_Mechanics:=DISTINCTCOUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
 8. A percentage measure was added to know how often each mechanic is used compared to the usage of all mechanics:  with the formula:
 ```
@@ -146,16 +144,16 @@ Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
 11. The sheet "Game Mechanics" was created with a Pivot Table from the Data Model.
 - Board game players seem to like the excitement and uncertainty of rolling their math rocks (dice) with 1,029 of the top games using the "Dice Rolling" mechanic.
 - This is followed by Variable Player Powers, Simulation, Hand Management, and a Hexagon Grid used in ~500 of the top games.
-![Top Boardgame Game Mechanics](/Images/top_game_mechanics.png)
+		<img src="/Images/top_game_mechanics.png" width=60% alt="Top Boardgame Game Mechanics">
 
 ##Wait, what am I supposed to do next?
 
 For each game, Boardgamegeek assigns a complexity rating between 1 and 5 defined as a "Community rating for how difficult a game is to understand. Lower rating (lighter weight) means easier."
 
- 1. A new column "Complexity Rounded" was created with the formula: `Number.RoundDown([Difficulty] / 0.25) * 0.25`
-2. "Complexity_Buckets" creates clear value buckets with the formula: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)`
+ 1. A new column "Complexity Rounded" was created: `Number.RoundDown([Difficulty] / 0.25) * 0.25`
+2. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)`
 3. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.25
-![Complexity Graph of Top Games](/Images/top_game_complexity.png)
+		<img src="/Images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
 		
 # What should the Checkmate LLC developers focus on?
 
