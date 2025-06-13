@@ -138,7 +138,7 @@ Count_of_95th_Percentile:=VAR PercentileValue = [95th_Percentile]
    2. The column statistics were checked to make sure there were 2,075 rows.
    3. The query "Top_Games" was added to the data model.   
 	
-	<img src="/Images/90th_percentile_column_stats.png" alt="90th Percentile Column Stats.png">  
+	<img src="/Images/90th_percentile_column_stats.png" width=30% alt="90th Percentile Column Stats.png">  
 
 # Let's be explicit
 1. In Power Pivot, "Top_Games" was added into the data model for the creation of explicit measures to save time in the long run.
@@ -173,10 +173,11 @@ The sheet "# of Players" compares the Minimum and Maximum number of player to th
 1. The Top_Games query was referenced to create "Top_Games_Minimum_Players."
    1. All column except ID, Name, Year Published, and Min Players were removed.
    2. A filter was applied to Min Players for any values >=5
-2. In the Top Games, only 13 require more than 4 players
-3. Changing the filer again, only 39 games require more than 3 players.   
+2. In the Top Games, only 13 require more than 4 players.   
 
 	<img src="/Images/side_quest_min_players.png" width=60% alt="Side Quest Into Player Minimums">  
+	
+3. Changing the filer again, only 39 games require more than 3 players.   
 
 ## One more round?
 
@@ -218,7 +219,7 @@ The "Top_Games" query includes the column "Mechanics" with each mechanic listed 
    2. A new row was created for each mechanic listed after the first. 
    3. For example,game ID "192891" is listed in 3 rows. Each row contains an individual mechanic: "Deck Bag and Pool Building", "Hand Management", and "Variable Player Powers."   
    
-   		<img src="/Images/unpivot_columns_example.png" alt="Unpivot Columns Example">   
+   		<img src="/Images/unpivot_columns_example.png" width=75% alt="Unpivot Columns Example">   
    
 6. "Attribute" will not be used so the column was removed.
 7. "Save and Load to" gives multiple options including the ability to load directly to a PivotTable Report and adding the query into the data model. This removes an extra step of creating a new sheet with a table and then adding it to the data model.
@@ -246,30 +247,14 @@ This is followed by Variable Player Powers, Simulation, Hand Management, and a H
 
 For each game, BoardGameGeek assigns a complexity rating between 1 and 5 defined as a "Community rating for how difficult a game is to understand. Lower rating (lighter weight) means easier."
 
-For example, the kids game [Trouble](https://boardgamegeek.com/boardgame/1410/trouble) is rated at 1.07. While [Europa Universalis](https://boardgamegeek.com/boardgame/4102/europa-universalis), a complex wargame reliving 300 years of world history with a playing time of <ins>60 hours</ins> has a rating of 4.82.
+For example, the kids game [Trouble](https://boardgamegeek.com/boardgame/1410/trouble) is rated at 1.07. While [Europa Universalis](https://boardgamegeek.com/boardgame/4102/europa-universalis), a complex wargame reliving 300 years of world history with a playing time of 60 hours has a rating of 4.82.
 
-1. All complexity values are rounded to the hundredths place. Grouping these values into buckets will provide a better analysis.
-   1. This is the first field I encountered an unexpected problem.
-2. It is not possible to group the values in a pivot table created from the data model, so a pivot table was created referencing the table "TopGames". 
-3. "Complexity Average" was added for the rows with an implicit measure for count.
-4. Grouping was added to "Complexity Average" starting at 0 and ending at 5, By 0.25 increments.
-5. A bar chart was created with the data but Excel processes the bucket numbers as text. This results in 1-1.25, 2-2.25… listed out of order.   
-		
-		   	<img src="/Images/complexity_bucket_problem.png" alt="Complexity_Bucket_Problem">  
-6. While a manual reorder is possible, it would not help if a different sutuation with hundreds of buckets out of order.
-7. This pivot table and chart were deleted for a better way.
 
-### The better way
+1. A new column "Complexity Rounded" was created: `Number.RoundDown([Difficulty] / 0.25) * 0.25`
+2. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)`
+3. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.25.  
 
-1. As an alternative method, in the query editor a new column "Complexity Rounded" was created: `Number.RoundDown([Difficulty] / 0.25) * 0.25`
-   1. This formula rounds down all values to the nearest quarter of a point.
-2. A new column named "Complexity_Buckets" created clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)`
-3. The query editor was closed and loaded.
-4. A pivot table was created with the new "Complexity_Buckets" field and an implicit measure for a count.
-
-The bar chart *"How Difficult Are the Top Games to Understand?"* with a slicer shows the top games mainly lie between 2 and 3.25.   
-
-		<img src="/Images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">   
+		<img src="/Images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
 		
 # What should the Checkmate LLC developers focus on?
 
@@ -292,5 +277,3 @@ There are already 9 games as of February 2021 which meet this criteria
 - Warhammer Age of Sigmar: Warcry Starter Set
 - Warmachine Prime Mk II
 - Yohei
-
-**Thank you**
