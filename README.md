@@ -62,7 +62,7 @@ The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" c
 - The 90th and 95th percentile were calculated with the formula:
 	`90th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.90)` (changing the final element for 95th percentile)
 - Two more measure were created to count the number of games in these percentiles.
-	```
+```
  Count_of_90th_Percentile:=VAR PercentileValue = [90th_Percentile]
 			RETURN
 			COUNTROWS(
@@ -71,7 +71,7 @@ The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" c
 			 All_games[Rating Average] >= PercentileValue
 			 )
 			)
-	```
+```
 - The 90th percentile was chosen with 2,075 games with a rating average of 7.56 or higher compared to the 95th percentile with 1,038 games and a rating average of 7.88 or higher.
 			
 - A new query named "Top_Games" was referenced and filter applied to the Rating Average for those greater than or equal to 7.56.
