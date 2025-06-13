@@ -37,7 +37,7 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 	
 ## Dataset Review
 1. 20,345 rows were imported into an Excel Table named "All_Games".
-2. The unique ID will be used as a primary key as there are 11 different games called "Robin Hood."
+2. Unique ID will be used as a primary key.
 3. The formula `=COUNTBLANK(All_Games[ID])` found 15 missing IDs.
 
 ### Updating missing IDs
@@ -52,11 +52,11 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 
 1. The table All_Games was added to the Data Model and a count of all games was calculated: `Game_Count:=DISTINCTCOUNT(All_games[ID])`
 2. Median of the Rating Average was calculated: `All_Games_Median:=MEDIAN(All_games[Rating Average])`
-3. Looking at the pivotchart **"How Many Boardgames Have Been Created Over Time?"**, over the past 20 years the number of boardgames have greatly increased. With the advent of crowdfunding platforms like Kickstarter and Indiegogo numerous small developers have been able to release their games.  
+3. Looking at the pivotchart **"How Many Boardgames Have Been Created Over Time?"**, over the past 20 years the number of boardgames have greatly increased.   
 
 	<img src="/Images/boardgames_over_time.png" width=100% alt="Boardgames over time">  
 	
-The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" column creating a nice bell curve with a median value is 6.43.  
+The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" column creating a nice bell curve. The median value was calculated to be 6.43 with: `All_Games_Median:=MEDIAN(All_games[Rating Average])`  
 
 	<img src="/Images/how_are_all_games_rated.png" width=100% alt="How Are All the Games Rated">	
 
@@ -99,9 +99,11 @@ The sheet "# of Players" compares the Minimum and Maximum number of player to th
 
 	<img src="/Images/min_players.png" width=60% alt="Minimum Number of Players">	  
 	
-3. The most common maximum number of player for the top games are 4 at 666 games and 2 at 630 games.  
+2. The most common maximum number of player for the top games are 4 at 666 games and 2 at 630 games.  
 
-	<img src="/Images/max_players.png" width=60% alt="Maximum Number of Players">  
+	<img src="/Images/max_players.png" width=60% alt="Maximum Number of Players">    
+	
+3. Looking at the minimum player count values, having a large minimum player count is not a good idea.
 
 ### Going on a side quest
 
@@ -111,7 +113,7 @@ Top_Games was referenced to create "Top_Games_Minimum_Players" with a filter app
 
 ## One more round?
 
-The sheets "Play Time" includes a bar chart with the top 20 play times.
+The "Play Time" sheet includes a bar chart with the top 20 play times.
 - 120, 60, and 90 minutes are the most popular followed by 180, 30, and 45.
 - Between 1 and 2 hours is the ideal play time. It's long enough to have engaging gameplay and strategy, yet short enough to prevent the game from becoming tedious.  
 
@@ -119,9 +121,9 @@ The sheets "Play Time" includes a bar chart with the top 20 play times.
 		
 ## More complicated than Trouble
 
-The sheet "Minimum Age" includes the bar chart "What is the Minimum Player Age of the Top Games?"
-		a. The top games recommend players be at least 12 to 14 years old.
-		b. At this age they would be mature enough to understand the rules and come up with a strategy.  
+The "Minimum Age" sheet includes the bar chart "What is the Minimum Player Age of the Top Games?"
+- The top games recommend players be at least 12 to 14 years old.
+- At this age they would be mature enough to understand the rules and come up with a strategy.  
 		
 		<img src="/Images/min_age.png" width=60% alt="Minimum Recommended Player Age">
 
@@ -129,11 +131,6 @@ The sheet "Minimum Age" includes the bar chart "What is the Minimum Player Age o
 
 While there are over 20,000 boardgames with a myriad of designs and themes, there are similar ways the games are played.
 Boardgame mechanics are the specific rules and systems that define how a game is played, influencing player actions, outcomes, and the overall flow of the game. They dictate everything from turn order to how players achieve victory. Each game typically has multiple mechanics.
-Some common mechanics include:
-- Dice rolling: Adding an element of chance and random outcomes. 
-- Card drafting: Players select from a pool of cards, then pass them to another player to select.
-- Area control: Players compete to control areas on a map or board. 
-- Set collection: Players collect specific sets of items or cards to score points
 	
 The "Top_Games" query was referenced creating a new query named "Top_Games_Mechanics".
 1. Cleaning up the data, 27 games were found with no mechanic listed.
@@ -143,7 +140,7 @@ The "Top_Games" query was referenced creating a new query named "Top_Games_Mecha
 5. The new sheet was renamed to "Game Mechanics".
 6. The "Count_Mechanic" explicit measure was created: `Count_Top_Game_Mechanics:=COUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
 7. To know how many game mechanics are available, a distinct measure was created: `Distinct_Top_Game_Mechanics:=DISTINCTCOUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
-8. A percentage measure was added to know how often each mechanic is used compared to the usage of all mechanics:  with the formula:
+8. A percentage measure was added to know how often each mechanic is used compared to the usage of all mechanics:
 ```
 Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
 	 COUNT([Top_Game_Mechanics]),
