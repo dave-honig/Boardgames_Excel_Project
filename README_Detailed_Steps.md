@@ -37,20 +37,20 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 	
 ## Dataset Review
 1. Using Power Query data was imported into an Excel Table named "All_Games". 
-  - 20,345 rows were loaded.
+   1. 20,345 rows were loaded.
 2. The unique ID will be a handy reference as some games have the same name.
-  - There are 11 different games called "Robin Hood."
+   1. There are 11 different games called "Robin Hood."
 3. The formula `=COUNTBLANK(All_Games[ID])` found 15 missing IDs.
 4. These numbers could be found by quickly searching boardgamegeek.com, but let's take the approach if there were many more missing values.
 
 ### Updating missing IDs
 
 1. [A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025) was loaded with "Only create Connection" and named *Feb2025 Boardgames*.  
-  i. This dataset was not originally used as it is missing many game details.
+   1. This dataset was not originally used as it is missing many game details.
 2. "Get data from .csv" imported the data and was loaded as to "Only create Connection."
 3. The query was named Feb2025 Boardgames
 4. In the query editor, for All_Games "Merge Queries" combined the data.
-  i. The "Name" and Year Published" were used for the matching columns
+   1. The "Name" and Year Published" were used for the matching columns
 	7. In the resulted merge, Game_ID, Description, and Link were kept.
 	8. Both ID and Final_ID were formatted as Text for the next step
 	9. A "Conditional Column" was added called Final_ID
