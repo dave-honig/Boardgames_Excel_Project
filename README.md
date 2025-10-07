@@ -56,11 +56,9 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 
 	<img src="/Images/boardgames_over_time.png" width=100% alt="Boardgames over time">  
 	
-The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" column creating a nice bell curve. The median value was calculated to be 6.43 with: `All_Games_Median:=MEDIAN(All_games[Rating Average])`
+The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" column creating a nice bell curve. Using the formula `All_Games_Median:=MEDIAN(All_games[Rating Average])`, the median value was calculated as 6.43.
 
-	<img src="/Images/all_games_rated.png" width=100% alt="How Are All the Games Rated">
-		<img src="/Images/boardgames_over_time.png" width=100% alt="Boardgames over time">  
-
+	<img src="/Images/how_are_all_games_rated.png" width=100% alt="How Are All the Games Rated">
 
 ## Do you have a game recommendation?
 
