@@ -240,7 +240,7 @@ Board game players seem to like the excitement and uncertainty of rolling their 
 
 This is followed by Variable Player Powers, Simulation, Hand Management, and a Hexagon Grid used in ~500 of the top games.  
 
-		<img src="/Images/top_game_mechanics.png" width=60% alt="Top Boardgame Game Mechanics">   
+	<img src="/Images/top_game_mechanics.png" width=60% alt="Top Boardgame Game Mechanics">   
 
 ## Wait, what am I supposed to do next?
 
