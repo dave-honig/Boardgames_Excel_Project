@@ -191,8 +191,8 @@ The "Play Time" sheet includes a bar chart with the top 20 play times.
 The "Minimum Age" sheet includes the bar chart "What is the Minimum Player Age of the Top Games?"
 - The top games recommend players be at least 12 to 14 years old.
 - At this age they would be mature enough to understand the rules and come up with a strategy.  
-		
-		<img src="/Images/min_age.png" width=60% alt="Minimum Recommended Player Age">
+
+	<img src="/Images/min_age.png" width=60% alt="Minimum Recommended Player Age">
 
 ## Do you  have any Jacks?
 
