@@ -216,9 +216,9 @@ The "Top_Games" query includes the column "Mechanics" with each mechanic listed 
 5. Selecting the 17 newly created columns, "Unpivot Columns" transforms the 17 columns into two: "Attribute" and "Value" which I renamed "Top_Game_Mechanics."
    1. Unpivoting the columns changed the row count from 2,046, all the way to 9,311.
    2. A new row was created for each mechanic listed after the first. 
-   3. For example,game ID "192891" is listed in 3 rows. Each row contains an individual mechanic: "Deck Bag and Pool Building", "Hand Management", and "Variable Player Powers."   
+   3. For example,game ID "192891" is listed in 3 rows. Each row contains an individual mechanic: "Deck Bag and Pool Building", "Hand Management", and "Variable Player Powers."  
    
-   		<img src="/Images/unpivot_columns_example.png" width=75% alt="Unpivot Columns Example">   
+	<img src="/Images/unpivot_columns_example.png" width=75% alt="Unpivot Columns Example">   
    
 6. "Attribute" will not be used so the column was removed.
 7. "Save and Load to" gives multiple options including the ability to load directly to a PivotTable Report and adding the query into the data model. This removes an extra step of creating a new sheet with a table and then adding it to the data model.
@@ -253,7 +253,7 @@ For example, the kids game [Trouble](https://boardgamegeek.com/boardgame/1410/tr
 2. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)`
 3. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.25.  
 
-		<img src="/Images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
+	<img src="/Images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
 		
 # What should the Checkmate LLC developers focus on?
 
