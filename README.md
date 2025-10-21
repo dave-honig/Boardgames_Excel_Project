@@ -159,7 +159,7 @@ For each game, Boardgamegeek assigns a complexity rating between 1 and 5 defined
 2. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)`
 3. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.25.  
 
-		<img src="/Images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
+<img src="/Images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
 		
 # What should the Checkmate LLC developers focus on?
 
