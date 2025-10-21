@@ -116,15 +116,13 @@ Top_Games was referenced to create "Top_Games_Minimum_Players" with a filter app
 The "Play Time" sheet includes a bar chart with the top 20 play times.
 - 120, 60, and 90 minutes are the most popular followed by 180, 30, and 45.
 - Between 1 and 2 hours is the ideal play time. It's long enough to have engaging gameplay and strategy, yet short enough to prevent the game from becoming tedious.  
-
 <img src="/Images/play_time.png" width=75% alt="Minimumn Play Time">  
 		
 ## More complicated than Trouble
 
 The "Minimum Age" sheet includes the bar chart "What is the Minimum Player Age of the Top Games?"
 - The top games recommend players be at least 12 to 14 years old.
-- At this age they would be mature enough to understand the rules and come up with a strategy.
-		
+- At this age they would be mature enough to understand the rules and come up with a strategy.  
 <img src="/Images/min_age.png" width=60% alt="Minimum Recommended Player Age">
 
 ## Do you  have any Jacks?
