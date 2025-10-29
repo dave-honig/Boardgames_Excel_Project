@@ -51,18 +51,18 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 ## When did we get so popular?
 
 1. The table All_Games was added to the Data Model and a count of all games was calculated: `Game_Count:=DISTINCTCOUNT(All_games[ID])`
-2. Median of the Rating Average was calculated: `All_Games_Median:=MEDIAN(All_games[Rating Average])`
+2. Median of the Game Rating was calculated: `All_Games_Median:=MEDIAN(All_games[Game Rating])`
 3. Looking at the pivotchart **"How Many Boardgames Have Been Created Over Time?"**, over the past 20 years the number of boardgames have greatly increased.   
 
 	<img src="/Images/boardgames_over_time.png" width=100% alt="Boardgames over time">  
 	
-The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" column creating a nice bell curve. Using the formula `All_Games_Median:=MEDIAN(All_games[Rating Average])`, the median value was calculated as 6.43.
+The histogram **"How Are All the Boardgames Rated"** uses the "Game Rating" column creating a nice bell curve. Using the formula `All_Games_Median:=MEDIAN(All_games[Game Rating])`, the median value was calculated as 6.43.
 
 <img src="/Images/how_are_all_games_rated.png" width=100% alt="How Are All the Games Rated">
 
 ## Do you have a game recommendation?
 
-- The 90th and 95th percentile were calculated: `90th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.90)` (changing the final element for 95th percentile)
+- The 90th and 95th percentile were calculated: `90th_Percentile:=PERCENTILE.INC(All_games[Game Rating],0.90)` (changing the final element for 95th percentile)
 - Two more measure were created to count the number of games in these percentiles.
 ```
  Count_of_90th_Percentile:=VAR PercentileValue = [90th_Percentile]
@@ -70,13 +70,13 @@ The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" c
 			COUNTROWS(
 			 FILTER(
 			 All_games,
-			 All_games[Rating Average] >= PercentileValue
+			 All_games[Game Rating] >= PercentileValue
 			 )
 			)
 ```
-- The 90th percentile was chosen with 2,075 games with a rating average of 7.56 or higher compared to the 95th percentile with 1,038 games and a rating average of 7.88 or higher.
+- The 90th percentile was chosen with 2,075 games with a Game Rating of 7.56 or higher compared to the 95th percentile with 1,038 games and a Game Rating of 7.88 or higher.
 			
-- A new query named "Top_Games" was referenced and filter applied to the Rating Average for those greater than or equal to 7.56.
+- A new query named "Top_Games" was referenced and filter applied to the Game Rating for those greater than or equal to 7.56.
 - Column statistics were checked to make sure there were 2,075 rows and the query was added to the data model
 
 # Let's be explicit
@@ -89,12 +89,12 @@ Percent_of_games:=DIVIDE(
 COUNT(TopGames[ID]),
 CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
 ```
-3. Rating Average: `Rating_Average_TopGames:=AVERAGE(TopGames[Rating Average])`
-4. Complexity Average: `Complexity_Average_TopGames:=AVERAGE(TopGames[Complexity Average])`
+3. Game Rating: `Game_Rating_TopGames:=AVERAGE(TopGames[Game Rating])`
+4. Complexity: `Complexity_TopGames:=AVERAGE(TopGames[Complexity])`
 
 ## How many can play?
 
-The sheet "# of Players" compares the Minimum and Maximum number of players to the Rating Average.
+The sheet "# of Players" compares the Minimum and Maximum number of players to the Game Rating.
 1. The most common minimum number of player for the top games are 2 at 1,190 games and 1 at 741 games.  
 
 	<img src="/Images/min_players.png" width=60% alt="Minimum Number of Players">	  

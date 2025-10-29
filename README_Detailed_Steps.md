@@ -69,9 +69,9 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 	
 ### Data exploration
 1. Boardgamegeek allows all users to rank games on a scale of 1-10.
-2. Each boardgame has a "Rating Average" calculated by averaging all user ratings whether they have played the game or not.
+2. Each boardgame has a "Game Rating" calculated by averaging all user ratings whether they have played the game or not.
    1. This is a limitation, though I don't believe  many people are rating games they have never played.
-3. These are the column statistics for the Rating Average.  
+3. These are the column statistics for the Game Rating.  
 	Count: 20345  
 	Error: 0  
 	Empty: 0  
@@ -89,7 +89,7 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 1. From the Power Query Editor, "All_Games" was closed and loaded to a new sheet named "All Games."
 2. The table All_Games was added to the Data Model.
 3. A count of all games was created with the formula:`Game_Count:=DISTINCTCOUNT(All_games[ID])`
-4. Median of the Rating Average was calculated: `All_Games_Median:=MEDIAN(All_games[Rating Average])`
+4. Median of the Game Rating was calculated: `All_Games_Median:=MEDIAN(All_games[Game Rating])`
 5. Looking at the pivotchart **"How Many Boardgames Have Been Created Over Time?"**, over the past 20 years the number of boardgames have greatly increased.
    1. With the advent of crowdfunding platforms like Kickstarter and Indiegogo numerous small developers have been able to release their games.
    2. The biggest success story is [Exploding Kittens](https://en.wikipedia.org/wiki/Exploding_Kittens) by The Oatmeal. *"Beginning as a [Kickstarter](https://en.wikipedia.org/wiki/Kickstarter) project seeking $10,000 USD in crowdfunding, it exceeded its goal in eight minutes. On January 27, 2015, after seven days, it passed 103,000 backers, setting the record for the most backers in Kickstarter history. At completion on February 19, 2015, it had US$8,782,571 in pledges by 219,382 backers."*  
@@ -98,7 +98,7 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 
 ### Not every game is a winner
 
-The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" column creating a nice bell curve. The median value was calculated to be 6.43 with: `All_Games_Median:=MEDIAN(All_games[Rating Average])`  
+The histogram **"How Are All the Boardgames Rated"** uses the "Game Rating" column creating a nice bell curve. The median value was calculated to be 6.43 with: `All_Games_Median:=MEDIAN(All_games[Game Rating])`  
 
 <img src="/Images/how_are_all_games_rated.png" width=90% alt="How Are All the Games Rated">	
 	
@@ -106,8 +106,8 @@ The histogram **"How Are All the Boardgames Rated"** uses the "Rating Average" c
 
 To determine how to choose the top games a couple options were considered. Picking a number like the top 1000 is easy but a more scientific choice was decided on. 
 1. First, the 90th and 95th percentile were calculated.
-   1. 90th Percentile: `90th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.90)` and
-   2. 95th Percentile: `95th_Percentile:=PERCENTILE.INC(All_games[Rating Average],0.95)`
+   1. 90th Percentile: `90th_Percentile:=PERCENTILE.INC(All_games[Game Rating],0.90)` and
+   2. 95th Percentile: `95th_Percentile:=PERCENTILE.INC(All_games[Game Rating],0.95)`
 2. Two more measure were created to count the number of games in these percentiles.
    1. 90th Percentile Count 
 ```
@@ -116,7 +116,7 @@ To determine how to choose the top games a couple options were considered. Picki
 			COUNTROWS(
 			 FILTER(
 			 All_games,
-			 All_games[Rating Average] >= PercentileValue
+			 All_games[Game Rating] >= PercentileValue
 			 )
 			)
 ```
@@ -127,13 +127,13 @@ Count_of_95th_Percentile:=VAR PercentileValue = [95th_Percentile]
 			COUNTROWS(
 			 FILTER(
 			 All_games,
-			 All_games[Rating Average] >= PercentileValue
+			 All_games[Game Rating] >= PercentileValue
 			 )
 			)
 ```
-3. The 90th percentile was chosen with 2,075 games with a rating average of 7.56 or higher compared to the 95th percentile with 1,038 games and a rating average of 7.88 or higher.
+3. The 90th percentile was chosen with 2,075 games with a Game Rating of 7.56 or higher compared to the 95th percentile with 1,038 games and a Game Rating of 7.88 or higher.
 4. In the Power Query Editor the original query was referenced to a new query named "Top_Games".
-   1. A filter was applied to the Rating Average for those greater than or equal to 7.56.
+   1. A filter was applied to the Game Rating for those greater than or equal to 7.56.
    2. The column statistics were checked to make sure there were 2,075 rows.
    3. The query "Top_Games" was added to the data model.   
 	
@@ -149,13 +149,13 @@ Percent_of_games:=DIVIDE(
 COUNT(TopGames[ID]),
 CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
 ```
-3. Rating Average: `Rating_Average_TopGames:=AVERAGE(TopGames[Rating Average])`
+3. Game Rating: `Game_Rating_TopGames:=AVERAGE(TopGames[Game Rating])`
    1. The top games have an average of 7.97/10
-4. Complexity Average: `Complexity_Average_TopGames:=AVERAGE(TopGames[Complexity Average])`
+4. Complexity: `Complexity_TopGames:=AVERAGE(TopGames[Complexity])`
 
 ## How many can play?
 
-The sheet "# of Players" compares the Minimum and Maximum number of player to the Rating Average. A slicer was added to both tables allowing visual comparison for counts on the lower end.
+The sheet "# of Players" compares the Minimum and Maximum number of player to the Game Rating. A slicer was added to both tables allowing visual comparison for counts on the lower end.
 
 1. The most common minimum number of player for the top games are 2 at 1,190 games and 1 at 741 games.  
 
@@ -208,7 +208,7 @@ The "Top_Games" query includes the column "Mechanics" with each mechanic listed 
    1. The next goal is to split this column into columns with one mechanic per column.
    2. Then create a single column with them all listed.
 1. Within the Power Query Editor the "Top_Games" query was references creating a new query named "Top_Games_Mechanics."
-2. Most of the columns are not needed so columns "ID", "Rating Average" and "Mechanics" were selected and "Remove Other Columns" cleaned up the query.
+2. Most of the columns are not needed so columns "ID", "Game Rating" and "Mechanics" were selected and "Remove Other Columns" cleaned up the query.
 3. Cleaning up the data, 27 games were found with no mechanic listed. 
    1. Blank cells were replaced with "None Listed"
 4. "Split Columns by Delimiter" is very similar to "Text to Columns" but with a few more options.
