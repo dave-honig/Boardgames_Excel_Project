@@ -94,12 +94,12 @@ CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
 
 ## How many can play?
 
-The sheet "# of Players" compares the Minimum and Maximum number of player to the Rating Average.
-1. The most common minimum number of player for the top games are 2 at 1,188 games and 1 at 741 games.  
+The sheet "# of Players" compares the Minimum and Maximum number of players to the Rating Average.
+1. The most common minimum number of player for the top games are 2 at 1,190 games and 1 at 741 games.  
 
 	<img src="/Images/min_players.png" width=60% alt="Minimum Number of Players">	  
 	
-2. The most common maximum number of player for the top games are 4 at 666 games and 2 at 630 games.  
+2. The most common maximum number of player for the top games are 4 at 666 games and 2 at 631 games.  
 
 	<img src="/Images/max_players.png" width=60% alt="Maximum Number of Players">    
 	
