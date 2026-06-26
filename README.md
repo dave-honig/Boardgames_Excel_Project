@@ -3,12 +3,13 @@
 ---
 
 ## Tableau Dashboard
-[View the Tableau dashboard](https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 <p align="center">
   <a href="https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">
-    <img src="images/boardgamegeek_tableau_dashboard_v1.png" width="80%"  alt="Tableau dashboard displaying boardgame metrics">
+    <img src="images/boardgamegeek_tableau_dashboard_v1.png" width="80%" alt="Tableau dashboard displaying boardgame metrics">
   </a>
+  <br>
+  <a href="https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">View the Tableau dashboard</a>
 </p>
 
 ---
