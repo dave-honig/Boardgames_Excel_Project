@@ -1,4 +1,17 @@
-# BoardGameGeek.com Excel Project
+# BoardGameGeek.com Excel and Tableau Project
+
+---
+
+## Tableau Dashboard
+
+<p align="center">
+  <a href="https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">
+    <img src="images/boardgamegeek_tableau_dashboard_v1.png" width="80%"  alt="Tableau dashboard displaying boardgame metrics">
+  </a>
+</p>
+[View the Tableau dashboard](https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+---
 
 ## Introduction
 
@@ -55,13 +68,17 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 6. Both ID and Final_ID were formatted as Text for the next step.
 7. A "Conditional Column" was added called Final_ID.  
 
-	<img src="/Images/conditional_column.png" width=60% alt="Conditional Column Entry">  
+<p align="center">
+	<img src="/images/conditional_column.png" width=60% alt="Conditional Column Entry">  
+	</p>
 
 8. Cleaning up, the two extra ID columns were removed.
 9. Two games were left with null values. 
 10. For completeness, two more clauses were added to the conditional formatting.  
 
-	<img src="/Images/updated_conditional_column.png" width=60% alt="Updated Conditional Column Entry">
+<p align="center">
+	<img src="/images/updated_conditional_column.png" width=60% alt="Updated Conditional Column Entry">
+	</p>
 
 11. Final_ID was renamed to ID
 12. Duplicate rows were removed using Remove Rows --> Remove Duplicates
@@ -93,14 +110,18 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 5. Looking at the pivotchart **"How Many Boardgames Have Been Created Over Time?"**, over the past 20 years the number of boardgames have greatly increased.
    1. With the advent of crowdfunding platforms like Kickstarter and Indiegogo numerous small developers have been able to release their games.
    2. The biggest success story is [Exploding Kittens](https://en.wikipedia.org/wiki/Exploding_Kittens) by The Oatmeal. *"Beginning as a [Kickstarter](https://en.wikipedia.org/wiki/Kickstarter) project seeking $10,000 USD in crowdfunding, it exceeded its goal in eight minutes. On January 27, 2015, after seven days, it passed 103,000 backers, setting the record for the most backers in Kickstarter history. At completion on February 19, 2015, it had US$8,782,571 in pledges by 219,382 backers."*  
-   
-	<img src="/Images/boardgames_over_time.png" width=100% alt="Boardgames over time">  
+
+<p align="center">   
+	<img src="/images/boardgames_over_time.png" width=100% alt="Boardgames over time">  
+	</p>
 
 ### Not every game is a winner
 
 The histogram **"How Are All the Boardgames Rated"** uses the "Game Rating" column creating a nice bell curve. The median value was calculated to be 6.43 with: `All_Games_Median:=MEDIAN(All_games[Game Rating])`  
 
-<img src="/Images/how_are_all_games_rated.png" width=90% alt="How Are All the Games Rated">	
+<p align="center">
+<img src="/images/how_are_all_games_rated.png" width=90% alt="How Are All the Games Rated">	
+</p>
 	
 ## Do you have a game recommendation?
 
@@ -136,8 +157,10 @@ Count_of_95th_Percentile:=VAR PercentileValue = [95th_Percentile]
    1. A filter was applied to the Game Rating for those greater than or equal to 7.56.
    2. The column statistics were checked to make sure there were 2,075 rows.
    3. The query "Top_Games" was added to the data model.   
-	
-	<img src="/Images/90th_percentile_column_stats.png" width=30% alt="90th Percentile Column Stats.png">  
+
+<p align="center">	
+	<img src="/images/90th_percentile_column_stats.png" width=30% alt="90th Percentile Column Stats.png">  
+	</p>
 
 # Let's be explicit
 1. In Power Pivot, "Top_Games" was added into the data model for the creation of explicit measures to save time in the long run.
@@ -159,11 +182,15 @@ The sheet "# of Players" compares the Minimum and Maximum number of player to th
 
 1. The most common minimum number of player for the top games are 2 at 1,190 games and 1 at 741 games.  
 
-	<img src="/Images/min_players.png" width=60% alt="Minimum Number of Players">	  
+<p align="center">
+	<img src="/images/min_players.png" width=60% alt="Minimum Number of Players">	
+	</p>  
 	
 2. The most common maximum number of player for the top games are 4 at 666 games and 2 at 631 games.  
 
-	<img src="/Images/max_players.png" width=60% alt="Maximum Number of Players">  
+<p align="center">
+	<img src="/images/max_players.png" width=60% alt="Maximum Number of Players">  
+	</p>
 	
 3. Looking at the minimum player count values, having a large minimum player count is not a good idea.
 
@@ -174,7 +201,9 @@ The sheet "# of Players" compares the Minimum and Maximum number of player to th
    2. A filter was applied to Min Players for any values >=5
 2. In the Top Games, only 13 require more than 4 players.   
 
-	<img src="/Images/side_quest_min_players.png" width=60% alt="Side Quest Into Player Minimums">  
+<p align="center">
+	<img src="/images/side_quest_min_players.png" width=60% alt="Side Quest Into Player Minimums">  
+	</p>
 	
 3. Changing the filer again, only 39 games require more than 3 players.   
 
@@ -184,7 +213,9 @@ The "Play Time" sheet includes a bar chart with the top 20 play times.
 - 120, 60, and 90 minutes are the most popular followed by 180, 30, and 45.
 - Between 1 and 2 hours is the ideal play time. It's long enough to have engaging gameplay and strategy, yet short enough to prevent the game from becoming tedious.  
 
-	<img src="/Images/play_time.png" width=75% alt="Minimumn Play Time">  
+<p align="center">
+	<img src="/images/play_time.png" width=75% alt="Minimumn Play Time">
+	</p>  
 
 ## More complicated than Trouble
 
@@ -192,7 +223,9 @@ The "Minimum Age" sheet includes the bar chart "What is the Minimum Player Age o
 - The top games recommend players be at least 12 to 14 years old.
 - At this age they would be mature enough to understand the rules and come up with a strategy.  
 
-	<img src="/Images/min_age.png" width=60% alt="Minimum Recommended Player Age">
+<p align="center">
+	<img src="/images/min_age.png" width=60% alt="Minimum Recommended Player Age">
+	</p>
 
 ## Do you  have any Jacks?
 
@@ -217,8 +250,10 @@ The "Top_Games" query includes the column "Mechanics" with each mechanic listed 
    1. Unpivoting the columns changed the row count from 2,046, all the way to 9,311.
    2. A new row was created for each mechanic listed after the first. 
    3. For example,game ID "192891" is listed in 3 rows. Each row contains an individual mechanic: "Deck Bag and Pool Building", "Hand Management", and "Variable Player Powers."  
-   
-	<img src="/Images/unpivot_columns_example.png" width=75% alt="Unpivot Columns Example">   
+
+<p align="center">   
+	<img src="/images/unpivot_columns_example.png" width=75% alt="Unpivot Columns Example">
+	</p>   
    
 6. "Attribute" will not be used so the column was removed.
 7. "Save and Load to" gives multiple options including the ability to load directly to a PivotTable Report and adding the query into the data model. This removes an extra step of creating a new sheet with a table and then adding it to the data model.
@@ -239,7 +274,10 @@ Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
 Board game players seem to like the excitement and uncertainty of rolling their math rocks (dice) with 1,029 of the top games using the "Dice Rolling" mechanic.
 
 This is followed by Variable Player Powers, Simulation, Hand Management, and a Hexagon Grid used in ~500 of the top games.  
-<img src="/Images/top_game_mechanics.png" width=60% alt="Top Boardgame Game Mechanics">   
+
+<p align="center">
+<img src="/images/top_game_mechanics.png" width=60% alt="Top Boardgame Game Mechanics">  
+</p> 
 
 ## Wait, what am I supposed to do next?
 
@@ -252,7 +290,9 @@ For example, the kids game [Trouble](https://boardgamegeek.com/boardgame/1410/tr
 2. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)`
 3. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.25.  
 
-	<img src="/Images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
+<p align="center">
+	<img src="/images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
+	</p>
 		
 # What should the Checkmate LLC developers focus on?
 
