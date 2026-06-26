@@ -4,10 +4,15 @@
 
 ## Tableau Dashboard
 [View the Tableau dashboard](https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+/*
+<p align="center">
+<img src="images/boardgamegeek_tableau_dashboard_v1.png" width="80%" margin-left= "10%" alt="Tableau dashboard displaying boardgame metrics">
+</p>
+*/
 
 <p align="center">
   <a href="https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">
-    <img src="images/boardgamegeek_tableau_dashboard_v1.png" width="80%" margin-left="10%" alt="Tableau dashboard displaying boardgame metrics">
+    <img src="images/boardgamegeek_tableau_dashboard_v1.png" width="80%"  alt="Tableau dashboard displaying boardgame metrics">
   </a>
 </p>
 
@@ -59,7 +64,7 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 2. [A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025) was loaded with "Only create Connection" and named *Feb2025 Boardgames*. This dataset was not originally used as it is missing many game details.
 3. The two queries were merged, a "Conditional Column" was added, and after removing duplicates the column ID was finalized.  
 
-	<img src="/Images/conditional_column.png" width=60% alt="Conditional Column Entry">
+	<img src="/images/conditional_column.png" width=60% alt="Conditional Column Entry">
 	
 ## When did we get so popular?
 
