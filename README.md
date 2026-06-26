@@ -1,4 +1,17 @@
-# BoardGameGeek.com Excel Project
+# BoardGameGeek.com Excel and Tableau Project
+
+---
+
+## Tableau Dashboard
+[View the Tableau dashboard](https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+<p align="center">
+  <a href="https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">
+    <img src="images/boardgamegeek_tableau_dashboard_v1.png" width="80%" margin-left="10%" alt="Tableau dashboard displaying boardgame metrics">
+  </a>
+</p>
+
+---
 
 ## Introduction
 
