@@ -1,7 +1,5 @@
 # BoardGameGeek.com Excel and Tableau Project
 
----
-
 ## Tableau Dashboard
 
 <p align="center">
