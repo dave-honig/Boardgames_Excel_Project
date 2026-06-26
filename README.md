@@ -4,11 +4,6 @@
 
 ## Tableau Dashboard
 [View the Tableau dashboard](https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
-/*
-<p align="center">
-<img src="images/boardgamegeek_tableau_dashboard_v1.png" width="80%" margin-left= "10%" alt="Tableau dashboard displaying boardgame metrics">
-</p>
-*/
 
 <p align="center">
   <a href="https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">
@@ -64,7 +59,9 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 2. [A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025) was loaded with "Only create Connection" and named *Feb2025 Boardgames*. This dataset was not originally used as it is missing many game details.
 3. The two queries were merged, a "Conditional Column" was added, and after removing duplicates the column ID was finalized.  
 
+<p align="center">
 	<img src="/images/conditional_column.png" width=60% alt="Conditional Column Entry">
+</p>
 	
 ## When did we get so popular?
 
@@ -72,11 +69,15 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 2. Median of the Game Rating was calculated: `All_Games_Median:=MEDIAN(All_games[Game Rating])`
 3. Looking at the pivotchart **"How Many Boardgames Have Been Created Over Time?"**, over the past 20 years the number of boardgames have greatly increased.   
 
-	<img src="/Images/boardgames_over_time.png" width=100% alt="Boardgames over time">  
+<p align="center">
+	<img src="/images/boardgames_over_time.png" width=100% alt="Boardgames over time">
+</p>
 	
 The histogram **"How Are All the Boardgames Rated"** uses the "Game Rating" column creating a nice bell curve. Using the formula `All_Games_Median:=MEDIAN(All_games[Game Rating])`, the median value was calculated as 6.43.
 
-<img src="/Images/how_are_all_games_rated.png" width=100% alt="How Are All the Games Rated">
+<p align="center">
+<img src="/images/how_are_all_games_rated.png" width=100% alt="How Are All the Games Rated">
+</p>
 
 ## Do you have a game recommendation?
 
@@ -115,11 +116,15 @@ CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
 The sheet "# of Players" compares the Minimum and Maximum number of players to the Game Rating.
 1. The most common minimum number of player for the top games are 2 at 1,190 games and 1 at 741 games.  
 
-	<img src="/Images/min_players.png" width=60% alt="Minimum Number of Players">	  
+<p align="center">	
+	<img src="/images/min_players.png" width=60% alt="Minimum Number of Players">
+</p>	  
 	
 2. The most common maximum number of player for the top games are 4 at 666 games and 2 at 631 games.  
 
-	<img src="/Images/max_players.png" width=60% alt="Maximum Number of Players">    
+<p align="center">
+	<img src="/images/max_players.png" width=60% alt="Maximum Number of Players">
+</p>    
 	
 3. Looking at the minimum player count values, having a large minimum player count is not a good idea.
 
@@ -133,15 +138,21 @@ Top_Games was referenced to create "Top_Games_Minimum_Players" with a filter app
 
 The "Play Time" sheet includes a bar chart with the top 20 play times.
 - 120, 60, and 90 minutes are the most popular followed by 180, 30, and 45.
-- Between 1 and 2 hours is the ideal play time. It's long enough to have engaging gameplay and strategy, yet short enough to prevent the game from becoming tedious.  
-<img src="/Images/play_time.png" width=75% alt="Minimumn Play Time">  
+- Between 1 and 2 hours is the ideal play time. It's long enough to have engaging gameplay and strategy, yet short enough to prevent the game from becoming tedious. 
+
+<p align="center"> 
+<img src="/images/play_time.png" width=75% alt="Minimumn Play Time">
+</p> 
 		
 ## More complicated than Trouble
 
 The "Minimum Age" sheet includes the bar chart "What is the Minimum Player Age of the Top Games?"
 - The top games recommend players be at least 12 to 14 years old.
-- At this age they would be mature enough to understand the rules and come up with a strategy.  
-<img src="/Images/min_age.png" width=60% alt="Minimum Recommended Player Age">
+- At this age they would be mature enough to understand the rules and come up with a strategy.
+
+<p align="center">
+<img src="/images/min_age.png" width=60% alt="Minimum Recommended Player Age">
+</p>
 
 ## Do you  have any Jacks?
 
@@ -167,7 +178,9 @@ Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
 - Board game players seem to like the excitement and uncertainty of rolling their math rocks (dice) with 1,029 of the top games using the "Dice Rolling" mechanic.
 - This is followed by Variable Player Powers, Simulation, Hand Management, and a Hexagon Grid used in ~500 of the top games.  
 
-<img src="/Images/top_game_mechanics.png" width=60% alt="Top Boardgame Game Mechanics">
+<p align="center">
+<img src="/images/top_game_mechanics.png" width=60% alt="Top Boardgame Game Mechanics">
+</p>
 
 ## Wait, what am I supposed to do next?
 
@@ -177,7 +190,9 @@ For each game, Boardgamegeek assigns a complexity rating between 1 and 5 defined
 2. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)`
 3. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.25.  
 
-<img src="/Images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
+<p align="center">
+<img src="/images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
+</p>
 		
 # What should the Checkmate LLC developers focus on?
 
