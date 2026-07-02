@@ -185,9 +185,9 @@ Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
 
 For each game, Boardgamegeek assigns a complexity rating between 1 and 5 defined as a "Community rating for how difficult a game is to understand. Lower rating (lighter weight) means easier."
 
-1. A new column "Complexity Rounded" was created: `Number.RoundDown([Difficulty] / 0.25) * 0.25`
-2. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.25)`
-3. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.25.  
+1. A new column "Complexity Rounded" was created: `Number.RoundDown([Difficulty] / 0.5) * 0.5`
+2. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.5)`
+3. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.5.  
 
 <p align="center">
 <img src="/images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
