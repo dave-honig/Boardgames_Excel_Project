@@ -196,21 +196,44 @@ For each game, Boardgamegeek assigns a complexity rating between 1 and 5 defined
 # What should the Checkmate LLC developers focus on?
 
 Reviewing each metric they should create a game with:
-1. A minimum of 2 players to play
-2. Will support 4 or more players
-3. Take 1 - 2 hours to complete
-4. Able to be played by those as young as 12
-5. Involve dice rolling, as well as either Variable Player Powers, Simulation, Hand Management, or a Hexagonal Grid.
-6. Have a complexity between 2 - 4 out of 5.
+1. A minimum of 2 players to play;
+2. Best played between 2 to 4 players;
+3. Takes 30 minutes - 2.5 hours to complete;
+4. Understood by those as young as 12 years;
+5. Involves dice rolling; and
+6. Has a complexity between 2 and 3.5 out of 5.
 
 ## Current offerings
-There are already 9 games as of February 2021 which meet this criteria
-- Bora Bora
-- Carnevale: Vicious Fighting Along the Canals of Venice
+There are 107 boardgames with these parameters. Narrowing it down to only those with a rating above 8.5 brings it down to 14:
+- Adventures in Neverland
+- Chain of Command
+- Code 3
 - Company of Heroes
-- Raiders of the North Sea
-- The Castles of Burgundy
-- Warhammer 40,000: Kill Team
-- Warhammer Age of Sigmar: Warcry Starter Set
-- Warmachine Prime Mk II
-- Yohei
+- Counter Attack
+- Dice Masters
+- DreadBall (Second Edition)
+- Kings of War (Third Edition)
+- Limbo: Eternal War
+- Middle-Earth Strategy Battle Game: Rules Manual
+- Moonstone
+- Oak & Iron: Core Box
+- Techno Bowl: Arcade Football Unplugged
+- World At War 85: Storming the Gap
+
+
+# What do you want to play?
+If you're interested in what to play, use the "Top Games Filter" tab to select your criteria and view matching game titles. A link is also provided to games profile on BoardGameGeek.com 
+
+## Fixing missing links
+Many of the games did not have hyperlinks in the original CSV.
+This was resolved in Power Query by creating the column "BGG_Hyperlink_Formula" which combines the website root with the game ID to create a complete link.
+
+`= Table.AddColumn(#"Sorted Rows2", "BGG_Hyperlink_Formula", each "https://boardgamegeek.com/boardgame/" & Text.From([ID]))`
+
+The link was added next to the pivot table to lookup the game name and provide the correct link using the formula:
+
+`=IF($A2="","",IFERROR(HYPERLINK(XLOOKUP($A2,TopGames[Name],TopGames[BGG_Hyperlink_Formula]),"BGG Link"),""))`
+
+<p align="center">
+<img src="/images/game_filter.png" width=80% alt="Excel Boardgame Filter Dashboard">
+</p>
