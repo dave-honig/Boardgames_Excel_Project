@@ -113,19 +113,20 @@ CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
 ## How many can play?
 
 The sheet "# of Players" compares the Minimum and Maximum number of players to the Game Rating.
+1. A handful of games listed their minimum or maximum players counts as 0. As this is unlikely, they were updated to null.
 1. The most common minimum number of player for the top games are 2 at 1,190 games and 1 at 741 games.  
 
 <p align="center">	
 	<img src="/images/min_players.png" width=60% alt="Minimum Number of Players">
 </p>	  
 	
-2. The most common maximum number of player for the top games are 4 at 666 games and 2 at 631 games.  
+1. The most common maximum number of player for the top games are 4 at 666 games and 2 at 631 games.  
 
 <p align="center">
 	<img src="/images/max_players.png" width=60% alt="Maximum Number of Players">
 </p>    
 	
-3. Looking at the minimum player count values, having a large minimum player count is not a good idea.
+1. Based on the chart, people prefer when fewer players are needed to start the game.
 
 ### Going on a side quest
 
@@ -135,8 +136,10 @@ Top_Games was referenced to create "Top_Games_Minimum_Players" with a filter app
 
 ## One more round?
 
-The "Play Time" sheet includes a bar chart with the top 20 play times.
-- 120, 60, and 90 minutes are the most popular followed by 180, 30, and 45.
+"Play Time" includes a chart with the top 20 play times.
+- The most common playtimes are in increments of 30 minutes. To address less common intervals, the "Time Buckets" column sorts the games into 30 minute increments with formula:
+`Number.ToText(Number.RoundDown([Play Time] / 30) * 30) & " - " & Number.ToText(Number.RoundDown([Play Time] / 30) * 30 + 29)`
+- 2 to 2.5 hours, 30 minutes to 1 hour, and 1 hour to 1.5 hours are the most popular followed by 1.5 hours  to 2 hours following close behind.
 - Between 1 and 2 hours is the ideal play time. It's long enough to have engaging gameplay and strategy, yet short enough to prevent the game from becoming tedious. 
 
 <p align="center"> 
@@ -145,8 +148,11 @@ The "Play Time" sheet includes a bar chart with the top 20 play times.
 		
 ## More complicated than Trouble
 
-The "Minimum Age" sheet includes the bar chart "What is the Minimum Player Age of the Top Games?"
-- The top games recommend players be at least 12 to 14 years old.
+The "Minimum Age" sheet includes the chart "What is the Minimum Player Age of the Top Games?"
+- 236 games have a minimim age of 0, with the next lowest age of 4 years. Based on previous columns these 0 values should have been null and were updated in Power Query.
+- Designing and themeing for a specific ages is unlikely, so age buckets of 3 years were created with the formula:
+`Number.ToText(Number.RoundDown([Min Age] / 3) * 3) & " - " & Number.ToText(Number.RoundDown([Min Age] / 3) * 3 + 2)`
+- Over 60% of the top games are recommend players be at least 12 to 14 years old.
 - At this age they would be mature enough to understand the rules and come up with a strategy.
 
 <p align="center">
@@ -187,7 +193,7 @@ For each game, Boardgamegeek assigns a complexity rating between 1 and 5 defined
 
 1. A new column "Complexity Rounded" was created: `Number.RoundDown([Difficulty] / 0.5) * 0.5`
 2. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.5)`
-3. The bar chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.5.  
+3. The chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.5.  
 
 <p align="center">
 <img src="/images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
