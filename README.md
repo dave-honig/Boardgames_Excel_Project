@@ -49,14 +49,14 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 	
 ## Dataset Review
 1. 20,345 rows were imported into an Excel Table named "All_Games".
-2. Unique ID will be used as a primary key.
-3. The formula `=COUNTBLANK(All_Games[ID])` found 15 missing IDs.
+1. Unique ID will be used as a primary key.
+1. The formula `=COUNTBLANK(All_Games[ID])` found 15 missing IDs.
 
 ### Updating missing IDs
 
 1. Missing IDs could be found by quickly searching boardgamegeek.com, but an approach was taken if there were many more missing values.
-2. [A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025) was loaded with "Only create Connection" and named *Feb2025 Boardgames*. This dataset was not originally used as it is missing many game details.
-3. The two queries were merged, a "Conditional Column" was added, and after removing duplicates the column ID was finalized.  
+1. [A BoardGameGeek list from February 2025](https://www.kaggle.com/datasets/bwandowando/boardgamegeek-board-games-reviews-jan-2025) was loaded with "Only create Connection" and named *Feb2025 Boardgames*. This dataset was not originally used as it is missing many game details.
+1. The two queries were merged, a "Conditional Column" was added, and after removing duplicates the column ID was finalized.  
 
 <p align="center">
 	<img src="/images/conditional_column.png" width=60% alt="Conditional Column Entry">
@@ -65,8 +65,8 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 ## When did we get so popular?
 
 1. The table All_Games was added to the Data Model and a count of all games was calculated: `Game_Count:=DISTINCTCOUNT(All_games[ID])`
-2. Median of the Game Rating was calculated: `All_Games_Median:=MEDIAN(All_games[Game Rating])`
-3. Looking at the pivotchart **"How Many Boardgames Have Been Created Over Time?"**, over the past 20 years the number of boardgames have greatly increased.   
+1. Median of the Game Rating was calculated: `All_Games_Median:=MEDIAN(All_games[Game Rating])`
+1. Looking at the pivotchart **"How Many Boardgames Have Been Created Over Time?"**, over the past 20 years the number of boardgames have greatly increased.   
 
 <p align="center">
 	<img src="/images/boardgames_over_time.png" width=100% alt="Boardgames over time">
@@ -101,14 +101,14 @@ The histogram **"How Are All the Boardgames Rated"** uses the "Game Rating" colu
 
 Explicit measures were added including:
 1. The count of games: `Count_TopGames:=DISTINCTCOUNT(TopGames[ID])`
-2. Percent of the top games:
+1. Percent of the top games:
 ```
 Percent_of_games:=DIVIDE(
 COUNT(TopGames[ID]),
 CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
 ```
-3. Game Rating: `Game_Rating_TopGames:=AVERAGE(TopGames[Game Rating])`
-4. Complexity: `Complexity_TopGames:=AVERAGE(TopGames[Complexity])`
+1. Game Rating: `Game_Rating_TopGames:=AVERAGE(TopGames[Game Rating])`
+1. Complexity: `Complexity_TopGames:=AVERAGE(TopGames[Complexity])`
 
 ## How many can play?
 
@@ -166,20 +166,28 @@ Boardgame mechanics are the specific rules and systems that define how a game is
 	
 The "Top_Games" query was referenced creating a new query named "Top_Games_Mechanics".
 1. Cleaning up the data, 27 games were found with no mechanic listed.
-2. Blank cells were replaced with "None Listed."
-3. Each mechanic was split into 17 new columns which were then unpivoted.
-4. Data was saved to a PivotTable Report and the query was added to the data model.
-5. The new sheet was renamed to "Game Mechanics".
-6. The "Count_Mechanic" explicit measure was created: `Count_Top_Game_Mechanics:=COUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
-7. To know how many game mechanics are available, a distinct measure was created: `Distinct_Top_Game_Mechanics:=DISTINCTCOUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
-8. A percentage measure was added to know how often each mechanic is used compared to the usage of all mechanics:
+1. Blank cells were replaced with "None Listed."
+1. Each mechanic was split into 17 new columns which were then unpivoted.
+1. Data was saved to a PivotTable Report and the query was added to the data model.
+1. Explicit measures were created to:
+     1. Count the number of mechanics
+ `Count_Top_Game_Mechanics:=COUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
+     1. Count the number of distinct mechanics `Distinct_Top_Game_Mechanics:=DISTINCTCOUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
+     1. Calculate the percentage of the mechanic to all mechanics:
 ```
-Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
+`Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
 	 COUNT([Top_Game_Mechanics]),
 	 CALCULATE(COUNT(Top_Games_Mechanics[Top_Game_Mechanics]), ALL(Top_Games_Mechanics))
-	 )
+	 )`
 ```	
-9. The sheet "Game Mechanics" was created with a Pivot Table from the Data Model.
+     1. Calculate the percentage of the top games with the mechanic.
+```
+`Percent_of_mechanic_to_all_games:=DIVIDE(
+        COUNT([Top_Game_Mechanics]),
+        CALCULATE(COUNT(TopGames[ID]), ALL(TopGames))
+    )`
+```
+1. The sheet "Game Mechanics" was created with a Pivot Table from the Data Model.
 - Board game players seem to like the excitement and uncertainty of rolling their math rocks (dice) with 1,029 of the top games using the "Dice Rolling" mechanic.
 - This is followed by Variable Player Powers, Simulation, Hand Management, and a Hexagon Grid used in ~500 of the top games.  
 
@@ -192,22 +200,54 @@ Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
 For each game, Boardgamegeek assigns a complexity rating between 1 and 5 defined as a "Community rating for how difficult a game is to understand. Lower rating (lighter weight) means easier."
 
 1. A new column "Complexity Rounded" was created: `Number.RoundDown([Difficulty] / 0.5) * 0.5`
-2. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.5)`
-3. The chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.5.  
+1. "Complexity_Buckets" creates clear value buckets: `Text.From([Complexity_Rounded]) & " - " & Text.From([Complexity_Rounded]+ 0.5)`
+1. The chart "How Difficult Are the Top Games to Understand?" with a slicer shows the top games mainly lie between 2 and 3.5.  
 
 <p align="center">
 <img src="/images/top_game_complexity.png" width=60% alt="Complexity Graph of Top Games">
 </p>
+
+## How competitive can you be?
+
+A  game's genre can help determine how serious your players want to be. Wargames and strategy games will likely be more competitive then family or party games. A single game can also have multiple genres.
+1. Each genre was split into new columns which were then unpivoted.
+1. Data was saved to a PivotTable Report and the query was added to the data model.
+1. Explicit measures were created to:
+     1. Count the number of genres
+ `Count_Top_Game_Genres:=COUNT(Top_Games_Genres[Game_Genre])`
+     1. Count the number of distinct genres `Distinct_Top_Game_Genres:=DISTINCTCOUNT(Top_Games_Genres[Game_Genre])`
+     1. Calculate the percentage of the genre to all genres:
+```
+`Percent_of_genre_to_all_genres:=DIVIDE(
+COUNT([Game_Genre]),
+CALCULATE(COUNT(Top_Games_Genres[Game_Genre]), ALL(Top_Games_Genres))
+)`
+```	
+     1. Calculate the percentage of the top games with the genre.
+```
+`Percent_of_genre_to_all_games:=DIVIDE(
+COUNT([Game_Genre]),
+CALCULATE(COUNT(TopGames[ID]), ALL(TopGames))
+)`
+```
+1. The sheet "Genre" was created with a Pivot Table from the Data Model.
+- ~70% games included a genre.
+-  1/3 of the top games were wargames followed by Strategy games at ~20%  and thematic games at 10%.
+<p align="center">
+<img src="/images/top_game_genres.png" width=60% alt="Top Boardgame Game Mechanics">
+</p>
+
 		
 # What should the Checkmate LLC developers focus on?
 
 Reviewing each metric they should create a game with:
 1. A minimum of 2 players to play;
-2. Best played between 2 to 4 players;
-3. Takes 30 minutes - 2.5 hours to complete;
-4. Understood by those as young as 12 years;
-5. Involves dice rolling; and
-6. Has a complexity between 2 and 3.5 out of 5.
+1. Best played between 2 to 4 players;
+1. Takes 30 minutes - 2.5 hours to complete;
+1. Understood by those as young as 12 years;
+1. Involves dice rolling;
+1. Have a wargame genre; and
+1. Has a complexity between 2 and 3.5 out of 5.
 
 ## Current offerings
 There are 107 boardgames with these parameters. Narrowing it down to only those with a rating above 8.5 brings it down to 14:
@@ -241,5 +281,5 @@ The link was added next to the pivot table to lookup the game name and provide t
 `=IF($A2="","",IFERROR(HYPERLINK(XLOOKUP($A2,TopGames[Name],TopGames[BGG_Hyperlink_Formula]),"BGG Link"),""))`
 
 <p align="center">
-<img src="/images/game_filter.png" width=80% alt="Excel Boardgame Filter Dashboard">
+<img src="/images/game_filter.png" width=100% alt="Excel Boardgame Filter Dashboard">
 </p>
