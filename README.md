@@ -169,23 +169,24 @@ The "Top_Games" query was referenced creating a new query named "Top_Games_Mecha
 1. Data was saved to a PivotTable Report and the query was added to the data model.
 1. Explicit measures were created to:
      1. Count the number of mechanics
-     `Count_Top_Game_Mechanics:=COUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
+       `Count_Top_Game_Mechanics:=COUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
      1. Count the number of distinct mechanics
-     `Distinct_Top_Game_Mechanics:=DISTINCTCOUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
+       `Distinct_Top_Game_Mechanics:=DISTINCTCOUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
      1. Calculate the percentage of the mechanic to all mechanics:
 	 
-     ```
-     Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
-	    COUNT([Top_Game_Mechanics]),
-	    CALCULATE(COUNT(Top_Games_Mechanics[Top_Game_Mechanics]), ALL(Top_Games_Mechanics)))
-     ```
+       ```
+       Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
+	      COUNT([Top_Game_Mechanics]),
+	      CALCULATE(COUNT(Top_Games_Mechanics[Top_Game_Mechanics]), ALL(Top_Games_Mechanics)))
+       ```
 	 
      1. Calculate the percentage of the top games with the mechanic.
-     ```
-     Percent_of_mechanic_to_all_games:=DIVIDE(
-        COUNT([Top_Game_Mechanics]),
-        CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
-     ```
+       
+	   ```
+       Percent_of_mechanic_to_all_games:=DIVIDE(
+          COUNT([Top_Game_Mechanics]),
+          CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
+       ```
 
 1. The sheet "Game Mechanics" was created with a Pivot Table from the Data Model.
 - Board game players seem to like the excitement and uncertainty of rolling their math rocks (dice) with 1,029 of the top games using the "Dice Rolling" mechanic.
