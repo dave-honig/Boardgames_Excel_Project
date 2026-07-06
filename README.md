@@ -88,9 +88,7 @@ The histogram **"How Are All the Boardgames Rated"** uses the "Game Rating" colu
 			COUNTROWS(
 			 FILTER(
 			 All_games,
-			 All_games[Game Rating] >= PercentileValue
-			 )
-			)
+			 All_games[Game Rating] >= PercentileValue))
 ```
 - The 90th percentile was chosen with 2,075 games with a Game Rating of 7.56 or higher compared to the 95th percentile with 1,038 games and a Game Rating of 7.88 or higher.
 			
@@ -174,19 +172,20 @@ The "Top_Games" query was referenced creating a new query named "Top_Games_Mecha
  `Count_Top_Game_Mechanics:=COUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
      1. Count the number of distinct mechanics `Distinct_Top_Game_Mechanics:=DISTINCTCOUNT(Top_Games_Mechanics[Top_Game_Mechanics])`
      1. Calculate the percentage of the mechanic to all mechanics:
+	 
 ```
-`Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
+Percent_of_Mechanic_to_all_mechanics:=DIVIDE(
 	 COUNT([Top_Game_Mechanics]),
-	 CALCULATE(COUNT(Top_Games_Mechanics[Top_Game_Mechanics]), ALL(Top_Games_Mechanics))
-	 )`
-```	
+	 CALCULATE(COUNT(Top_Games_Mechanics[Top_Game_Mechanics]), ALL(Top_Games_Mechanics)))
+```
      1. Calculate the percentage of the top games with the mechanic.
+	 
 ```
-`Percent_of_mechanic_to_all_games:=DIVIDE(
+Percent_of_mechanic_to_all_games:=DIVIDE(
         COUNT([Top_Game_Mechanics]),
-        CALCULATE(COUNT(TopGames[ID]), ALL(TopGames))
-    )`
+        CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
 ```
+
 1. The sheet "Game Mechanics" was created with a Pivot Table from the Data Model.
 - Board game players seem to like the excitement and uncertainty of rolling their math rocks (dice) with 1,029 of the top games using the "Dice Rolling" mechanic.
 - This is followed by Variable Player Powers, Simulation, Hand Management, and a Hexagon Grid used in ~500 of the top games.  
@@ -218,21 +217,21 @@ A  game's genre can help determine how serious your players want to be. Wargames
      1. Count the number of distinct genres `Distinct_Top_Game_Genres:=DISTINCTCOUNT(Top_Games_Genres[Game_Genre])`
      1. Calculate the percentage of the genre to all genres:
 ```
-`Percent_of_genre_to_all_genres:=DIVIDE(
-COUNT([Game_Genre]),
-CALCULATE(COUNT(Top_Games_Genres[Game_Genre]), ALL(Top_Games_Genres))
-)`
-```	
-     1. Calculate the percentage of the top games with the genre.
+Percent_of_genre_to_all_genres:=DIVIDE(
+	COUNT([Game_Genre]),
+	CALCULATE(COUNT(Top_Games_Genres[Game_Genre]), ALL(Top_Games_Genres)))
 ```
-`Percent_of_genre_to_all_games:=DIVIDE(
-COUNT([Game_Genre]),
-CALCULATE(COUNT(TopGames[ID]), ALL(TopGames))
-)`
+     1. Calculate the percentage of the top games with the genre.
+
+```
+Percent_of_genre_to_all_games:=DIVIDE(
+	COUNT([Game_Genre]),
+	CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
 ```
 1. The sheet "Genre" was created with a Pivot Table from the Data Model.
 - ~70% games included a genre.
 -  1/3 of the top games were wargames followed by Strategy games at ~20%  and thematic games at 10%.
+
 <p align="center">
 <img src="/images/top_game_genres.png" width=60% alt="Top Boardgame Game Mechanics">
 </p>
@@ -274,12 +273,13 @@ If you're interested in what to play, use the "Top Games Filter" tab to select y
 Many of the games did not have hyperlinks in the original CSV.
 This was resolved in Power Query by creating the column "BGG_Hyperlink_Formula" which combines the website root with the game ID to create a complete link.
 
-`= Table.AddColumn(#"Sorted Rows2", "BGG_Hyperlink_Formula", each "https://boardgamegeek.com/boardgame/" & Text.From([ID]))`
-
+```
+= Table.AddColumn(#"Sorted Rows2", "BGG_Hyperlink_Formula", each "https://boardgamegeek.com/boardgame/" & Text.From([ID]))
+```
 The link was added next to the pivot table to lookup the game name and provide the correct link using the formula:
-
-`=IF($A2="","",IFERROR(HYPERLINK(XLOOKUP($A2,TopGames[Name],TopGames[BGG_Hyperlink_Formula]),"BGG Link"),""))`
-
+```
+=IF($A2="","",IFERROR(HYPERLINK(XLOOKUP($A2,TopGames[Name],TopGames[BGG_Hyperlink_Formula]),"BGG Link"),""))
+```
 <p align="center">
 <img src="/images/game_filter.png" width=100% alt="Excel Boardgame Filter Dashboard">
 </p>
