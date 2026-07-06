@@ -72,7 +72,7 @@ BoardGameGeek.com is a well-known website in the board game community. It provid
 	<img src="/images/boardgames_over_time.png" width=100% alt="Boardgames over time">
 </p>
 	
-The histogram **"How Are All the Boardgames Rated"** uses the "Game Rating" column creating a nice bell curve. Using the formula `All_Games_Median:=MEDIAN(All_games[Game Rating])`, the median value was calculated as 6.43.
+The histogram **"How Are All the Boardgames Rated"** uses the "Game Rating" column creating a nice bell curve. Using the formula `All_Games_Median:=MEDIAN(All_games[Game Rating])`, the median value is 6.43 out of 10.
 
 <p align="center">
 <img src="/images/how_are_all_games_rated.png" width=100% alt="How Are All the Games Rated">
@@ -92,33 +92,33 @@ The histogram **"How Are All the Boardgames Rated"** uses the "Game Rating" colu
 ```
 - The 90th percentile was chosen with 2,075 games with a Game Rating of 7.56 or higher compared to the 95th percentile with 1,038 games and a Game Rating of 7.88 or higher.
 			
-- A new query named "Top_Games" was referenced and filter applied to the Game Rating for those greater than or equal to 7.56.
-- Column statistics were checked to make sure there were 2,075 rows and the query was added to the data model
+- A new query named "Top_Games" was referenced and games were filtered by on the Game Ratings column to those greater than or equal to 7.56.
+- Column statistics were checked to make sure there were 2,075 rows and the query was added to the data model.
 
 # Let's be explicit
 
 Explicit measures were added including:
 1. The count of games: `Count_TopGames:=DISTINCTCOUNT(TopGames[ID])`
 1. Percent of the top games:
-```
-Percent_of_games:=DIVIDE(
-COUNT(TopGames[ID]),
-CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
-```
+     ```
+     Percent_of_games:=DIVIDE(
+       COUNT(TopGames[ID]),
+       CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
+    ```
 1. Game Rating: `Game_Rating_TopGames:=AVERAGE(TopGames[Game Rating])`
 1. Complexity: `Complexity_TopGames:=AVERAGE(TopGames[Complexity])`
 
 ## How many can play?
 
-The sheet "# of Players" compares the Minimum and Maximum number of players to the Game Rating.
+The sheet "# of Players" compares the minimum and maximum number of players to the Game Rating.
 1. A handful of games listed their minimum or maximum players counts as 0. As this is unlikely, they were updated to null.
-1. The most common minimum number of player for the top games are 2 at 1,190 games and 1 at 741 games.  
+1. The most common minimum number of player for the top games is 2 at 1,190 games and 1 at 741 games.  
 
 <p align="center">	
 	<img src="/images/min_players.png" width=60% alt="Minimum Number of Players">
 </p>	  
 	
-1. The most common maximum number of player for the top games are 4 at 666 games and 2 at 631 games.  
+1. The most common maximum number of player for the top games is 4 at 666 games and 2 at 631 games.  
 
 <p align="center">
 	<img src="/images/max_players.png" width=60% alt="Maximum Number of Players">
@@ -163,8 +163,7 @@ While there are over 20,000 boardgames with a myriad of designs and themes, ther
 Boardgame mechanics are the specific rules and systems that define how a game is played, influencing player actions, outcomes, and the overall flow of the game. They dictate everything from turn order to how players achieve victory. Each game typically has multiple mechanics.
 	
 The "Top_Games" query was referenced creating a new query named "Top_Games_Mechanics".
-1. Cleaning up the data, 27 games were found with no mechanic listed.
-1. Blank cells were replaced with "None Listed."
+1. Cleaning up the data, 27 games have no mechanic listed. Blank cells were replaced with "None Listed."
 1. Each mechanic was split into 17 new columns which were then unpivoted.
 1. Data was saved to a PivotTable Report and the query was added to the data model.
 1. Explicit measures were created to:
@@ -234,8 +233,8 @@ A  game's genre can help determine how serious your players want to be. Wargames
        ```
 	   
 1. The sheet "Genre" was created with a Pivot Table from the Data Model.
-- ~70% games included a genre.
--  1/3 of the top games were wargames followed by Strategy games at ~20%  and thematic games at 10%.
+- ~70% games included at least one genre.
+-  1/3 of the top games were wargames followed by strategy games at ~20% and thematic games at 10%.
 
 <p align="center">
 <img src="/images/top_game_genres.png" width=60% alt="Top Boardgame Game Mechanics">
