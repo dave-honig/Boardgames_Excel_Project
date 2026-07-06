@@ -180,7 +180,7 @@ The "Top_Games" query was referenced creating a new query named "Top_Games_Mecha
 	      CALCULATE(COUNT(Top_Games_Mechanics[Top_Game_Mechanics]), ALL(Top_Games_Mechanics)))
        ```
 	 
-     1. Calculate the percentage of the top games with the mechanic.
+     iv. Calculate the percentage of the top games with the mechanic.
        
 	   ```
        Percent_of_mechanic_to_all_games:=DIVIDE(
@@ -215,21 +215,24 @@ A  game's genre can help determine how serious your players want to be. Wargames
 1. Data was saved to a PivotTable Report and the query was added to the data model.
 1. Explicit measures were created to:
      1. Count the number of genres
- `Count_Top_Game_Genres:=COUNT(Top_Games_Genres[Game_Genre])`
-     1. Count the number of distinct genres `Distinct_Top_Game_Genres:=DISTINCTCOUNT(Top_Games_Genres[Game_Genre])`
+       `Count_Top_Game_Genres:=COUNT(Top_Games_Genres[Game_Genre])`
+     1. Count the number of distinct genres
+        	`Distinct_Top_Game_Genres:=DISTINCTCOUNT(Top_Games_Genres[Game_Genre])`
      1. Calculate the percentage of the genre to all genres:
-```
-Percent_of_genre_to_all_genres:=DIVIDE(
-	COUNT([Game_Genre]),
-	CALCULATE(COUNT(Top_Games_Genres[Game_Genre]), ALL(Top_Games_Genres)))
-```
-     1. Calculate the percentage of the top games with the genre.
+	 
+       ```
+       Percent_of_genre_to_all_genres:=DIVIDE(
+	       COUNT([Game_Genre]),
+	       CALCULATE(COUNT(Top_Games_Genres[Game_Genre]), ALL(Top_Games_Genres)))
+       ```
+     iv. Calculate the percentage of the top games with the genre.
 
-```
-Percent_of_genre_to_all_games:=DIVIDE(
-	COUNT([Game_Genre]),
-	CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
-```
+       ```
+       Percent_of_genre_to_all_games:=DIVIDE(
+	      COUNT([Game_Genre]),
+	      CALCULATE(COUNT(TopGames[ID]), ALL(TopGames)))
+       ```
+	   
 1. The sheet "Genre" was created with a Pivot Table from the Data Model.
 - ~70% games included a genre.
 -  1/3 of the top games were wargames followed by Strategy games at ~20%  and thematic games at 10%.
