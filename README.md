@@ -3,11 +3,11 @@
 ## Tableau Dashboard
 
 <p align="center">
-  <a href="https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">
+  <a href="https://public.tableau.com/shared/G2Z5PH787?:display_count=n&:origin=viz_share_link">
     <img src="images/boardgamegeek_tableau_dashboard.png" width="80%" alt="Tableau dashboard displaying boardgame metrics">
   </a>
   <br>
-  <a href="https://public.tableau.com/views/BoardGameGeekBoardgamesProject/BoardgameDashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link">View the Tableau dashboard</a>
+  <a href="https://public.tableau.com/shared/G2Z5PH787?:display_count=n&:origin=viz_share_link">View the Tableau dashboard</a>
 </p>
 
 ---
