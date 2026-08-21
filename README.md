@@ -1,4 +1,4 @@
-# BoardGameGeek.com Excel and Tableau Project
+# Characteristics of the Top 10% of Boardgames: Analysis of 2,075 boardgames as of February 2021 from BoardGameGeek.com
 
 ## Tableau Dashboard
 
